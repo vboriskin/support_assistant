@@ -1,40 +1,53 @@
 #!/usr/bin/env bash
-# Запуск Support Assistant локально.
+# Запуск Support Assistant локально — БОЕВОЙ РЕЖИМ без демо-данных.
 #
-# Делает всё, что нужно для холодного старта:
-#   0) интерактивно спрашивает корп-токен (если не сохранён) и режим работы;
-#   1) подчищает «хвосты» предыдущих попыток (битые маркеры, кэши, locked-db);
+# Если нужны другие сценарии — используй обёртки:
+#   ./run_demo.sh        — то же, но с сидингом 200 демо-тикетов и mock-LLM
+#   ./run_fresh.sh       — боевой, со сбросом всех хвостов (.venv, БД, .env)
+#   ./run_demo_fresh.sh  — демо, со сбросом всех хвостов
+#
+# Делает (в любом режиме):
+#   0) интерактивно спрашивает корп-токен (если не сохранён);
+#   1) подчищает битые маркеры venv, локфайлы SQLite, кэши Python;
 #   2) поднимает .venv (создаёт, если нет);
 #   3) ставит pip/setuptools/wheel в venv (Python 3.12+ их не кладёт сам);
 #   4) ставит проект (pip install -e . --no-build-isolation);
 #   5) применяет alembic-миграции до head;
-#   6) при пустой БД — засеивает sample_tickets.csv (200 синтетических тикетов);
-#   7) поднимает uvicorn на http://127.0.0.1:8000/ui.
+#   6) поднимает uvicorn на http://127.0.0.1:8000/ui.
+#
+# Дополнительно в режиме DEMO (флаг --demo или переменная SA_DEMO=1):
+#   - если нет .env → копирует .env.demo (mock-LLM + mock-embeddings);
+#   - если БД пустая и есть data/sample_tickets.csv → ингест 200 тикетов.
+#
+# В дополнение FRESH (флаг --fresh или SA_FRESH=1):
+#   - сносит .venv, data/app.db*, .env, .sber_pypi_token, кэши и сидит заново.
 #
 # Флаги:
-#   --fresh         снести всё (.venv, БД, кэши, .env, токен) и спросить заново
-#   --reset         пересоздать БД с нуля (rm data/app.db*)
+#   --demo          включить demo-режим (см. выше)
+#   --fresh         снести всё перед запуском
+#   --reset         пересоздать только БД (rm data/app.db*)
 #   --reset-deps    переустановить зависимости (стирает marker, не сам venv)
-#   --no-seed       не засеивать sample_tickets.csv даже при пустой БД
 #   --no-install    пропустить шаг pip install (быстрый старт)
 #   --no-prompt     не задавать интерактивных вопросов (для CI)
 #   --port N        порт uvicorn (по умолчанию 8000)
 #   --host H        хост uvicorn (по умолчанию 127.0.0.1)
 #
 # Использование:
-#   ./run.sh                       # обычный старт (спросит токен/режим, если нужно)
-#   ./run.sh --fresh               # «начисто» — снести всё и начать с нуля
-#   ./run.sh --reset --port 8080   # сбросить БД, другой порт
+#   ./run.sh                       # боевой режим без демо-данных
+#   ./run.sh --demo                # с демо-данными (или ./run_demo.sh)
+#   ./run.sh --fresh               # боевой, начисто (или ./run_fresh.sh)
+#   ./run.sh --demo --fresh        # демо, начисто (или ./run_demo_fresh.sh)
 
 set -euo pipefail
 
 cd "$(dirname "$0")"
 
 # ---------- args ----------
-FRESH=0
+# Дефолты: боевой режим, без сидинга. Обёртки могут передать SA_DEMO=1 / SA_FRESH=1.
+DEMO="${SA_DEMO:-0}"
+FRESH="${SA_FRESH:-0}"
 RESET=0
 RESET_DEPS=0
-NO_SEED=0
 NO_INSTALL=0
 NO_PROMPT=0
 PORT=8000
@@ -42,16 +55,16 @@ HOST="127.0.0.1"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --demo)         DEMO=1; shift ;;
     --fresh)        FRESH=1; shift ;;
     --reset)        RESET=1; shift ;;
     --reset-deps)   RESET_DEPS=1; shift ;;
-    --no-seed)      NO_SEED=1; shift ;;
     --no-install)   NO_INSTALL=1; shift ;;
     --no-prompt)    NO_PROMPT=1; shift ;;
     --port)         PORT="$2"; shift 2 ;;
     --host)         HOST="$2"; shift 2 ;;
     -h|--help)
-      sed -n '2,28p' "$0" | sed 's/^# \{0,1\}//'
+      sed -n '2,40p' "$0" | sed 's/^# \{0,1\}//'
       exit 0
       ;;
     *) echo "Неизвестный флаг: $1" >&2; exit 2 ;;
@@ -183,32 +196,26 @@ export PIP_DEFAULT_TIMEOUT="${PIP_DEFAULT_TIMEOUT:-600}"
 export PIP_RETRIES="${PIP_RETRIES:-10}"
 export PIP_PROGRESS_BAR="${PIP_PROGRESS_BAR:-on}"
 
-# ---------- 4. Интерактив: demo-режим / реальные интеграции ----------
-if [[ ! -f .env && $NO_PROMPT -eq 0 ]]; then
-  echo
-  log "Файла .env нет — нужно выбрать режим работы."
-  log "Demo-режим:  mock-LLM + mock-эмбеддинги — всё локально, без интернета."
-  log "Боевой:       реальные GigaChat/OpenAI/HuggingFace — настроишь сам в вкладке «Настройки»."
-  ask "Использовать demo-режим? [Y/n] "
-  read -r DEMO || DEMO=""
-  case "$DEMO" in
-    n|N|no|No|NO|нет|Нет|НЕТ)
-      log "Боевой режим — создаю пустой .env (всё на дефолтах)."
-      echo "# Создан run.sh — настрой через UI «Настройки» или вручную" > .env
-      ;;
-    *)
-      if [[ -f .env.demo ]]; then
-        cp .env.demo .env
-        ok ".env скопирован из .env.demo (mock-LLM + mock-эмбеддинги)"
-      else
-        warn ".env.demo не найден — создаю минимальный .env с mock-провайдерами"
-        cat > .env <<'ENVMOCK'
+# ---------- 4. Подготовка .env по выбранному режиму ----------
+if [[ ! -f .env ]]; then
+  if [[ $DEMO -eq 1 ]]; then
+    if [[ -f .env.demo ]]; then
+      cp .env.demo .env
+      ok "Demo-режим: .env скопирован из .env.demo (mock-LLM + mock-embeddings)"
+    else
+      warn ".env.demo не найден — создаю минимальный .env с mock-провайдерами"
+      cat > .env <<'ENVMOCK'
 LLM_PROVIDER=mock
 EMBEDDINGS_PROVIDER=mock
 ENVMOCK
-      fi
-      ;;
-  esac
+    fi
+  else
+    log "Боевой режим: создаю пустой .env (настроишь через UI «Настройки»)"
+    cat > .env <<'ENVPROD'
+# Создан run.sh — боевой режим. Заполни через UI «Настройки» или вручную.
+# Примеры значений см. в .env.example.
+ENVPROD
+  fi
 fi
 
 # ---------- 5. .venv ----------
@@ -274,8 +281,8 @@ fi
 log "Применяю alembic-миграции"
 python -m scripts.init_db
 
-# ---------- 9. Опциональный посев ----------
-if [[ $NO_SEED -eq 0 ]]; then
+# ---------- 9. Сидинг демо-данных (только в demo-режиме) ----------
+if [[ $DEMO -eq 1 ]]; then
   # Берём только последнюю строку и глушим логи в stderr — иначе structlog'и
   # из импортируемых модулей (например, sqlite_vec.load_failed на macOS)
   # склеиваются с числом и ломают условие.
@@ -295,16 +302,17 @@ async def main():
 asyncio.run(main())
 PY
 )"
-  # Чистим до чисто-числа на всякий случай
   TICKETS_COUNT="$(printf '%s' "$TICKETS_COUNT" | tr -dc '0-9')"
   TICKETS_COUNT="${TICKETS_COUNT:-0}"
   if [[ "$TICKETS_COUNT" -eq 0 && -f data/sample_tickets.csv ]]; then
-    log "БД пустая — запускаю ингест data/sample_tickets.csv (200 тикетов, ~1-2 мин на mock-LLM)"
+    log "Demo-режим: БД пустая → ингест data/sample_tickets.csv (200 тикетов, ~1-2 мин на mock-LLM)"
     python -m scripts.ingest_tickets data/sample_tickets.csv || \
       warn "Ингест завершился с ошибкой. UI поднимется, но индекс будет пустым."
   else
     log "В БД уже $TICKETS_COUNT тикетов — пропускаю seed"
   fi
+else
+  log "Боевой режим: сидинг демо-данных пропущен (используй ./run_demo.sh для демо)"
 fi
 
 # ---------- 10. Uvicorn ----------
