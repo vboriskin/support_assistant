@@ -141,6 +141,15 @@ class GigaChatClient:
         return token
 
     async def _get_token(self, *, force_refresh: bool = False) -> str:
+        # 1. Готовый токен из настроек / .env — без OAuth-обмена.
+        #    Используется, когда токен выдан внешне (тестовый стенд, ad-hoc
+        #    проверка, обход OAuth-инфры). Кэш по нему не ведём — считаем,
+        #    что админ положил живой токен.
+        if not force_refresh:
+            preset = self.gc.access_token.get_secret_value().strip()
+            if preset:
+                return preset
+
         if not force_refresh and self._token_cache.is_valid():
             tok = self._token_cache.get()
             assert tok is not None

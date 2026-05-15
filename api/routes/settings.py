@@ -85,9 +85,13 @@ _GROUPS: list[GroupSpec] = [
             # GigaChat
             FieldSpec(name="GIGACHAT_BASE_URL", type="str", description="GigaChat API URL"),
             FieldSpec(name="GIGACHAT_AUTH_URL", type="str", description="GigaChat OAuth URL"),
-            FieldSpec(name="GIGACHAT_CLIENT_ID", type="secret", secret=True, description="GigaChat client_id"),
-            FieldSpec(name="GIGACHAT_CLIENT_SECRET", type="secret", secret=True, description="GigaChat client_secret"),
-            FieldSpec(name="GIGACHAT_SCOPE", type="enum", options=["GIGACHAT_API_PERS", "GIGACHAT_API_B2B", "GIGACHAT_API_CORP"], description="Скоуп токена"),
+            FieldSpec(
+                name="GIGACHAT_ACCESS_TOKEN", type="secret", secret=True,
+                description="Готовый Bearer-токен GigaChat. Если задан — OAuth (client_id+client_secret) не используется."
+            ),
+            FieldSpec(name="GIGACHAT_CLIENT_ID", type="secret", secret=True, description="GigaChat client_id (для OAuth, если нет токена выше)"),
+            FieldSpec(name="GIGACHAT_CLIENT_SECRET", type="secret", secret=True, description="GigaChat client_secret (для OAuth)"),
+            FieldSpec(name="GIGACHAT_SCOPE", type="enum", options=["GIGACHAT_API_PERS", "GIGACHAT_API_B2B", "GIGACHAT_API_CORP"], description="Скоуп OAuth"),
             FieldSpec(name="GIGACHAT_MODEL_PRIMARY", type="str", description="Модель для ответов"),
             FieldSpec(name="GIGACHAT_MODEL_JUDGE", type="str", description="Модель для evals/judge"),
             FieldSpec(name="GIGACHAT_VERIFY_SSL", type="bool", description="Проверять TLS-сертификат GigaChat"),
@@ -194,6 +198,7 @@ def _gather_live_values(s: Settings) -> dict[str, Any]:
         "LLM_MAX_RETRIES": s.llm.max_retries,
         "LLM_BUDGET_PER_USER_DAILY": s.llm.budget_per_user_daily,
         "GIGACHAT_BASE_URL": s.gigachat.base_url, "GIGACHAT_AUTH_URL": s.gigachat.auth_url,
+        "GIGACHAT_ACCESS_TOKEN": s.gigachat.access_token.get_secret_value(),
         "GIGACHAT_CLIENT_ID": s.gigachat.client_id.get_secret_value(),
         "GIGACHAT_CLIENT_SECRET": s.gigachat.client_secret.get_secret_value(),
         "GIGACHAT_SCOPE": s.gigachat.scope,

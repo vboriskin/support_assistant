@@ -135,6 +135,7 @@ def _settings_snapshot(s: Settings) -> dict[str, Any]:
             "model_judge": s.gigachat.model_judge,
             "verify_ssl": s.gigachat.verify_ssl,
             "ca_bundle_path": str(s.gigachat.ca_bundle_path or ""),
+            "access_token_set": bool(s.gigachat.access_token.get_secret_value()),
             "client_id_mask": _mask(s.gigachat.client_id.get_secret_value()),
             "client_secret_set": bool(s.gigachat.client_secret.get_secret_value()),
         },

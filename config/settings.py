@@ -70,6 +70,10 @@ class GigaChatSettings(BaseSettings):
     )
     base_url: str = "https://gigachat.devices.sberbank.ru/api/v1"
     auth_url: str = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
+    # Готовый Bearer-токен (если задан — OAuth-обмен не делается; используется
+    # как fast-path для тестов и когда токен внешне выпущен). См. также
+    # INTEGRATIONS_PORTING_GUIDE: «token ИЛИ clientId+clientSecret».
+    access_token: SecretStr = SecretStr("")
     client_id: SecretStr = SecretStr("")
     client_secret: SecretStr = SecretStr("")
     scope: str = "GIGACHAT_API_CORP"
