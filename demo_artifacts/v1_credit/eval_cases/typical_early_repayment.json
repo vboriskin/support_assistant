@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_early_repayment",
+  "category": "Графики",
+  "edge_case_type": "typical",
+  "query": "Клиент хочет погасить кредит досрочно, кнопка в ЛК серая",
+  "expected_sources": ["kb_chunk:early_repayment"],
+  "must_mention": ["30 дней", "ЛК"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Досрочное доступно с 30-го дня после выдачи. Проверить дату выдачи в карточке."
+}

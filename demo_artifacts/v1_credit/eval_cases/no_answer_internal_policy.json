@@ -1,0 +1,10 @@
+{
+  "case_id": "no_answer_internal_policy",
+  "category": "Прочее",
+  "edge_case_type": "no_answer_in_kb",
+  "query": "Как подключить интеграцию с региональным БКИ «Уральское»?",
+  "expected_sources": [],
+  "must_mention": ["нет"],
+  "must_not_mention": ["придумаю", "примерно так"],
+  "expected_answer_summary": "Ассистент должен честно сказать, что такой инструкции нет в базе. Завести тикет на risk_team / интеграционная команда."
+}

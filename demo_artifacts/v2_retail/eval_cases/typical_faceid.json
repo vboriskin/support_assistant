@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_faceid",
+  "category": "Авторизация",
+  "edge_case_type": "typical",
+  "query": "После обновления iOS Face ID не работает в приложении",
+  "expected_sources": ["kb_chunk:biometric_auth"],
+  "must_mention": ["Настройки", "Face ID"],
+  "must_not_mention": ["переустановить приложение"],
+  "expected_answer_summary": "Зайти в Настройки iOS → Банк → Face ID — включить. После этого войти один раз по PIN."
+}

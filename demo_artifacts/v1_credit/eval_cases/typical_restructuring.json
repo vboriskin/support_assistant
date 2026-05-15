@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_restructuring",
+  "category": "Графики",
+  "edge_case_type": "typical",
+  "query": "Клиент потерял работу, не может платить — что предложить",
+  "expected_sources": ["kb_chunk:restructuring", "playbook:playbook_restructuring"],
+  "must_mention": ["каникулы", "реструктуризация"],
+  "must_not_mention": ["спишем долг"],
+  "expected_answer_summary": "Предложить кредитные каникулы или реструктуризацию через ЛК. Подчеркнуть, что не дожидаться просрочки."
+}

@@ -1,0 +1,112 @@
+/* Layout: sidebar + main. */
+
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--app-bg-card);
+  border-right: 1px solid var(--app-border-subtle);
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sidebar__brand {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--app-text-primary);
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--app-radius-md);
+  color: var(--app-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition:
+    background var(--duration-quick) var(--ease-decel),
+    color var(--duration-quick) var(--ease-decel);
+}
+.sidebar__link .ico { color: inherit; }
+
+.sidebar__link:hover {
+  background: var(--app-bg-elevated);
+  color: var(--app-text-primary);
+  text-decoration: none;
+}
+
+.sidebar__link[aria-current="page"] {
+  background: var(--app-accent);
+  color: var(--app-accent-contrast);
+}
+
+.sidebar__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--app-text-muted);
+  font-size: 12px;
+}
+
+.main {
+  padding: var(--space-6);
+  overflow-y: auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.page-header h1 {
+  margin-bottom: var(--space-1);
+}
+
+.page-header__sub {
+  color: var(--app-text-secondary);
+  font-size: 14px;
+}
+
+.row { display: flex; gap: var(--space-4); align-items: center; }
+.col { display: flex; flex-direction: column; gap: var(--space-3); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    padding: var(--space-3);
+  }
+  .sidebar__nav { flex-direction: row; }
+  .sidebar__footer { display: none; }
+  .main { padding: var(--space-4); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}

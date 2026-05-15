@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_dkp_email_typo",
+  "category": "ДКП",
+  "edge_case_type": "typical",
+  "query": "После подписания ДКП не уходит на e-mail клиенту",
+  "expected_sources": ["ticket_summary:KC-10020"],
+  "must_mention": ["почт"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Проверить адрес e-mail клиента в карточке — частая причина: лишний пробел или точка в конце."
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_insurance_refund",
+  "category": "Документы",
+  "edge_case_type": "typical",
+  "query": "Клиент подписал договор вчера и хочет отказаться от страховки",
+  "expected_sources": ["kb_chunk:insurance", "playbook:playbook_insurance_refund"],
+  "must_mention": ["14 дней", "период охлаждения"],
+  "must_not_mention": [],
+  "expected_answer_summary": "В пределах 14 дней — отказ в ЛК → Страховки → Отказаться. Возврат 10 рабочих дней. Предупредить про возможный пересчёт ставки."
+}

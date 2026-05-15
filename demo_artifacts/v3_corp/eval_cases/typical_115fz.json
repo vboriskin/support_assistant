@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_115fz",
+  "category": "Расчётный счёт",
+  "edge_case_type": "typical",
+  "query": "Клиент-юрик: заблокировали счёт по 115-ФЗ, что делать",
+  "expected_sources": ["kb_chunk:account_blocked_115fz"],
+  "must_mention": ["7 рабочих дней", "комплаенс"],
+  "must_not_mention": ["переведите деньги в другой банк"],
+  "expected_answer_summary": "Не паниковать. Срок ответа 7 рабочих дней. Документы загружать в кабинет → Комплаенс, не на e-mail."
+}

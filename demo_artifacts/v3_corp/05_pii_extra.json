@@ -1,0 +1,37 @@
+[
+  {
+    "label": "INN_LEGAL",
+    "pattern": "\\b\\d{10}\\b",
+    "description": "ИНН юрлица (10 цифр)."
+  },
+  {
+    "label": "INN_INDIVIDUAL",
+    "pattern": "\\b\\d{12}\\b",
+    "description": "ИНН физлица / ИП (12 цифр)."
+  },
+  {
+    "label": "OGRN",
+    "pattern": "\\b\\d{13}\\b",
+    "description": "ОГРН юрлица (13 цифр)."
+  },
+  {
+    "label": "OGRNIP",
+    "pattern": "\\b\\d{15}\\b",
+    "description": "ОГРНИП индивидуального предпринимателя (15 цифр)."
+  },
+  {
+    "label": "RUSSIAN_ACCOUNT",
+    "pattern": "\\b40\\d{18}\\b",
+    "description": "Расчётный счёт юрлица (40 + 18 цифр)."
+  },
+  {
+    "label": "KBK",
+    "pattern": "\\b\\d{20}\\b",
+    "description": "Код бюджетной классификации (20 цифр)."
+  },
+  {
+    "label": "CONTRACT_NO_CORP",
+    "pattern": "\\bРС-\\d{4}/\\d{4,6}\\b",
+    "description": "Номер договора расчётного счёта (РС-2026/000123)."
+  }
+]

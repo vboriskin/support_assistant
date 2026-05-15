@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_refusal_message",
+  "category": "Решение",
+  "edge_case_type": "typical",
+  "query": "Клиент звонит после отказа и требует объяснений, что сказать",
+  "expected_sources": ["kb_chunk:refusal_explanation", "playbook:playbook_refusal"],
+  "must_mention": ["115-ФЗ", "60 дней"],
+  "must_not_mention": ["плохая кредитная история", "у вас был отказ"],
+  "expected_answer_summary": "Использовать стандартную формулировку. Не раскрывать причину. Сообщить про повторную подачу через 60 дней."
+}

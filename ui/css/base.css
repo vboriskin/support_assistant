@@ -1,0 +1,159 @@
+/* Reset + типографика. Шкала и веса — по бренд-системе. */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter",
+               "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--app-text-primary);
+  background: var(--app-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Шкала:
+   display 72/200, headline 32/300, subtitle 18/500,
+   body 15/400, bodySmall 13/400, caption 11/500 1.5px UPPERCASE. */
+
+h1 {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.t-display {
+  font-size: 72px;
+  font-weight: 200;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.t-headline {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.t-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--app-text-secondary);
+}
+
+.t-body { font-size: 15px; line-height: 1.6; }
+.t-body-small { font-size: 13px; line-height: 1.5; color: var(--app-text-secondary); }
+
+.t-caption {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--app-text-secondary);
+}
+
+.t-mono {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, ui-monospace, monospace;
+  font-size: 13px;
+}
+
+.t-mono-number {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, ui-monospace, monospace;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.t-secondary { color: var(--app-text-secondary); }
+.t-muted     { color: var(--app-text-muted); }
+
+a {
+  color: var(--app-text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--app-border-default);
+  transition: text-decoration-color var(--duration-quick) var(--ease-decel);
+}
+a:hover { text-decoration-color: var(--app-text-primary); }
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--app-text-primary);
+  background: var(--app-bg-card);
+  border: 1px solid var(--app-border-default);
+  border-radius: var(--app-radius-md);
+  padding: var(--space-2) var(--space-3);
+  transition:
+    border-color var(--duration-quick) var(--ease-decel),
+    background-color var(--duration-quick) var(--ease-decel);
+}
+input::placeholder, textarea::placeholder { color: var(--app-text-muted); }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--app-text-primary);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+code, pre {
+  font-family: "JetBrains Mono", "SF Mono", Menlo, ui-monospace, monospace;
+  font-size: 13px;
+}
+
+pre {
+  background: var(--app-bg-elevated);
+  padding: var(--space-3);
+  border-radius: var(--app-radius-md);
+  overflow-x: auto;
+  border: 1px solid var(--app-border-subtle);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--app-text-primary);
+  outline-offset: 2px;
+  border-radius: var(--app-radius-sm);
+}

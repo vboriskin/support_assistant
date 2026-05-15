@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_withdraw_application",
+  "category": "Решение",
+  "edge_case_type": "typical",
+  "query": "Клиент передумал брать кредит, как отозвать одобренную заявку",
+  "expected_sources": ["kb_chunk:withdrawal_and_cancellation"],
+  "must_mention": ["до подписания"],
+  "must_not_mention": [],
+  "expected_answer_summary": "До подписания ДКП — отозвать в карточке менеджера или в ЛК клиента, бесплатно. После — расторжение договора в период охлаждения 14 дней."
+}

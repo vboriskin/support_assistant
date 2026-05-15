@@ -1,0 +1,197 @@
+<section data-page="instructions">
+  <header class="page-header">
+    <div>
+      <h1>Инструкция для нового пользователя</h1>
+      <div class="page-header__sub">Пошагово: что куда нажать, чтобы получить пользу за 10 минут</div>
+    </div>
+  </header>
+
+  <nav class="instructions__toc card">
+    <h4>Содержание</h4>
+    <ol>
+      <li><a href="#step-setup">0. Когда стенд только подняли</a></li>
+      <li><a href="#step-ingest">1. Загрузить тикеты в индекс</a></li>
+      <li><a href="#step-kb">2. Завести базу знаний</a></li>
+      <li><a href="#step-assistant">3. Спросить ассистента</a></li>
+      <li><a href="#step-feedback">4. Оценить ответ и отправить в eval-набор</a></li>
+      <li><a href="#step-analyze">5. Разобрать новый тикет (анализ)</a></li>
+      <li><a href="#step-evals">6. Прогнать evals</a></li>
+      <li><a href="#step-weak">7. Чинить «слабые ответы»</a></li>
+      <li><a href="#step-prompts">8. Поправить промпт (sandbox)</a></li>
+      <li><a href="#step-fewshot">9. Зафиксировать «золотой» ответ как few-shot</a></li>
+      <li><a href="#step-pii">10. Настроить PII под свои поля</a></li>
+      <li><a href="#step-health">11. Проверить здоровье и деньги</a></li>
+      <li><a href="#step-alerts">12. Включить алёрты</a></li>
+      <li><a href="#step-settings">13. Сменить LLM / интеграции</a></li>
+    </ol>
+  </nav>
+
+  <article class="card instructions__step" id="step-setup">
+    <h3>0. Стенд только подняли — что увидишь</h3>
+    <p>После <code>./run.sh</code> на <a href="#/dashboard">/ui/#/dashboard</a> видишь сводку.
+       Если БД пустая, KPI будут нулевыми. Это нормально.</p>
+    <ul>
+      <li>Слева — сайдбар с разделами. Сейчас читаешь страницу «Инструкция».</li>
+      <li>В правом верхнем углу — переключатель тёмной/светлой темы.</li>
+      <li>В <a href="#/health">«Здоровье»</a> можно проверить, что ассистент достучался до LLM и эмбеддингов.</li>
+    </ul>
+  </article>
+
+  <article class="card instructions__step" id="step-ingest">
+    <h3>1. Загрузить тикеты в индекс</h3>
+    <p>Открой <a href="#/ingest">«Ингест»</a>. Это страница, через которую данные попадают
+       в индекс ассистента.</p>
+    <ol>
+      <li>Если у тебя есть CSV (формат — см. <a href="#/artifacts">вкладку «Артефакты»</a> → артефакт «Исторические закрытые тикеты»),
+          перетащи файл в дроп-зону.</li>
+      <li>Нажми «Запустить ингест». Ниже появится job с прогресс-баром (обновляется по SSE).</li>
+      <li>Когда job станет <span class="status-chip" data-status="resolved">succeeded</span>, открой <a href="#/tickets">«Тикеты»</a> — данные уже в БД и в поиске.</li>
+    </ol>
+    <p class="t-secondary">Демо-CSV (200 синтетических тикетов) лежит рядом с проектом в <code>data/sample_tickets.csv</code> и сидится автоматически при первом <code>./run.sh</code>.</p>
+  </article>
+
+  <article class="card instructions__step" id="step-kb">
+    <h3>2. Завести базу знаний</h3>
+    <p>База знаний (KB) — это инструкции и SOP, на которые ассистент опирается, когда тикетов мало или решение неочевидное.</p>
+    <ol>
+      <li>Открой <a href="#/kb">«База знаний»</a>.</li>
+      <li>Нажми <strong>«+ Новая статья»</strong> — заполни тему, модуль, тело в markdown.
+          Сохрани — статья режется на чанки и попадает в индекс автоматически.</li>
+      <li>Либо <strong>«Импорт zip / md»</strong>: zip-архив с *.md-файлами, для bulk-загрузки.</li>
+    </ol>
+    <p class="t-secondary">Формат и пример — в <a href="#/artifacts">«Артефакты»</a> → «Статьи базы знаний».</p>
+  </article>
+
+  <article class="card instructions__step" id="step-assistant">
+    <h3>3. Спросить ассистента</h3>
+    <ol>
+      <li>Открой <a href="#/assistant">«Ассистент»</a>.</li>
+      <li>Введи вопрос в стиле первой линии поддержки: «Не загружается скан паспорта у клиента, файл 12 МБ».</li>
+      <li>Опционально: над полем ввода — поиск тикетов. Найди и «прицепи» тикет — ассистент учтёт его контекст.</li>
+      <li>Если хочешь, чтобы ассистент мог задать уточняющий вопрос вместо ответа — поставь галку «Разрешать уточняющие вопросы».</li>
+      <li>Нажми «Спросить». Сначала появятся <strong>источники</strong>, потом потоковый ответ. Цифры <code>[1]</code>, <code>[2]</code> в тексте — ссылки на источники справа. Наведи на цифру — карточка подсветится.</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-feedback">
+    <h3>4. Оценить ответ и (если хороший) — в eval-набор</h3>
+    <p>Под каждым ответом ассистента есть три кнопки:</p>
+    <ul>
+      <li><strong>👍 Помогло</strong> / <strong>👎 Не помогло</strong> — сохраняется в БД. Эти оценки потом видны на <a href="#/weak">«Слабых ответах»</a>.</li>
+      <li><strong>+ В eval-набор</strong> — открывает диалог: query, expected_sources, must_mention/must_not, edge_case_type. Сохраняется как JSON-кейс в <code>evals/cases/</code> — потом этот кейс прогоняется при каждом запуске evals.</li>
+      <li><strong>★ В few-shot</strong> — отправляет пару (вопрос, ответ) на модерацию. После approve в <a href="#/fewshot">«Few-shot»</a> попадает в системный промпт следующих вызовов.</li>
+    </ul>
+  </article>
+
+  <article class="card instructions__step" id="step-analyze">
+    <h3>5. Разобрать новый тикет — категоризация + RAG + драфт</h3>
+    <ol>
+      <li>Открой <a href="#/tickets">«Тикеты»</a>, кликни на строку.</li>
+      <li>В детальной карточке справа — кнопка <strong>«Анализ»</strong>. Жмёшь — за один вызов получаешь:
+        <ul>
+          <li>Категоризацию (модуль, тип, срочность, на какую группу эскалировать);</li>
+          <li>Ответ ассистента со ссылками на источники;</li>
+          <li>Готовый драфт ответа клиенту.</li>
+        </ul>
+      </li>
+      <li>Скопировать в свой ответ — обычное <code>Cmd+C</code>.</li>
+      <li>Если тикет добавился позже и не в индексе — <strong>«Переиндексировать»</strong> рядом.</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-evals">
+    <h3>6. Прогнать evals</h3>
+    <p>Evals — это «контрольная работа» для ассистента. Набор эталонных кейсов прогоняется через текущий промпт+LLM+индекс, считаются метрики (faithfulness, helpfulness, recall@5, MRR), результат сравнивается с предыдущим прогоном.</p>
+    <ol>
+      <li>Открой <a href="#/evals">«Evals»</a>.</li>
+      <li>Кнопка <strong>«Запустить прогон»</strong> — берёт все кейсы из <code>evals/cases/</code>.</li>
+      <li>Через минуту-другую прогон появится в таблице. Кликни — увидишь per-case карточки: где ассистент проседает.</li>
+      <li>В блоке «Сравнение прогонов» выбери два прогона (A и B) — увидишь, какие кейсы улучшились/просели, и Δ агрегатов.</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-weak">
+    <h3>7. Чинить «слабые ответы»</h3>
+    <p>Все ответы, где оператор поставил 👎, ассистент не нашёл источников или явно отказался, копятся на <a href="#/weak">«Слабые ответы»</a>.</p>
+    <ol>
+      <li>Открой страницу, фильтруй по периоду и причине.</li>
+      <li>По каждой строке: 1 клик <strong>«+ В eval-набор»</strong> — превращаешь проблему в постоянную проверку.</li>
+      <li>Если в KB не хватает статьи — заведи её на странице <a href="#/kb">KB</a>. Если ответ должен был быть из тикета, которого нет — догружай через ингест.</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-prompts">
+    <h3>8. Поправить системный промпт в sandbox'е</h3>
+    <p><a href="#/prompts">«Промпты»</a> — это playground для безопасной правки.</p>
+    <ol>
+      <li>Слева текущий активный промпт (промпт A). Справа — твой черновик (промпт B).</li>
+      <li>Под полями выбери eval-кейс или введи произвольный запрос — жми <strong>«Сравнить»</strong>.</li>
+      <li>Внизу — ответ A vs ответ B. Видно, что меняется.</li>
+      <li>Когда устраивает — <strong>«Сохранить B как версию»</strong>. Можно «сразу активировать» — следующие ответы ассистента пойдут через новый промпт.</li>
+      <li>В таблице версий — кнопки активации / удаления неактивных.</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-fewshot">
+    <h3>9. Зафиксировать «золотой» ответ как few-shot</h3>
+    <p>Few-shot пример — это пара (вопрос, эталонный ответ), которая подмешивается в системный промпт. Помогает ассистенту копировать твой стиль ответа.</p>
+    <ol>
+      <li>Под хорошим ответом нажми <strong>★ В few-shot</strong> — пример уйдёт со статусом <code>pending</code>.</li>
+      <li>Открой <a href="#/fewshot">«Few-shot»</a>, отфильтруй по «pending».</li>
+      <li>Если ответ действительно эталонный — нажми <strong>Approve</strong>. Следующий вызов ассистента уже его учтёт.</li>
+      <li>Можно создать пример руками — кнопка «+ Новый пример».</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-pii">
+    <h3>10. Настроить PII под свои поля</h3>
+    <p>Базовый masker закрывает ФИО, телефоны, e-mail, паспорта. Но у банка часто есть свои форматы: номера договоров, application_id, и т.д.</p>
+    <ol>
+      <li>Открой <a href="#/pii">«PII playground»</a>.</li>
+      <li>Вставь текст с твоими настоящими полями.</li>
+      <li>В блоке «Дополнительные паттерны» добавь свой regex — например, <code>\bAPP-\d{8,12}\b</code> с меткой <code>APPLICATION_ID</code>.</li>
+      <li>Жми «Замаскировать» — увидишь, что попало.</li>
+      <li>Когда regex проверен — закрепи его в проекте (формат описан в <a href="#/artifacts">«Артефакты»</a> → «Словарь PII / секретов»).</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-health">
+    <h3>11. Проверить здоровье и деньги</h3>
+    <ul>
+      <li><a href="#/health">«Здоровье»</a> — пинги LLM, embeddings, vector_store, FTS. Coverage по модулям: где KB пустая.</li>
+      <li><a href="#/costs">«Стоимость»</a> — токены и латентность по типам вызова (answer / summary / judge / categorize). p95-латентность — главное число, на которое смотрит дежурный.</li>
+      <li><a href="#/stale">«Устаревшее KB»</a> — статьи, которые давно не обновлялись и собирают негативный feedback. Reviewer queue.</li>
+      <li><a href="#/audit">«Аудит»</a> — лог всех изменений (кто заводил KB, кто запускал ингест, кто менял настройки).</li>
+    </ul>
+  </article>
+
+  <article class="card instructions__step" id="step-alerts">
+    <h3>12. Включить алёрты</h3>
+    <ol>
+      <li>Открой <a href="#/alerts">«Алёрты»</a> — увидишь текущие сигналы и пороги.</li>
+      <li>Чтобы их получать — заведи Slack/Mattermost incoming webhook и впиши URL.</li>
+      <li>В <a href="#/settings">«Настройки» → «Алёрты»</a>: включи <code>ALERTS_ENABLED=true</code>, задай <code>ALERTS_WEBHOOK_URL</code>, при желании подкрути пороги p95/no_sources/errors.</li>
+      <li>Сохрани → перезапусти сервер (<code>Ctrl+C</code> в окне с <code>./run.sh</code>, потом <code>./run.sh --no-install</code>).</li>
+    </ol>
+  </article>
+
+  <article class="card instructions__step" id="step-settings">
+    <h3>13. Сменить LLM или включить интеграции</h3>
+    <ol>
+      <li>Открой <a href="#/settings">«Настройки»</a>.</li>
+      <li>В разделе «LLM» переключи провайдер (mock / gigachat / yandexgpt / openai_compatible) и впиши креды.</li>
+      <li>В разделе «Интеграции — TLS / прокси»: галка <strong>«Проверять TLS»</strong> — выключи, если у вас внутрикорпоративный сертификат, который Python не доверяет.</li>
+      <li>В разделе «Embeddings» переключи провайдер на <code>local</code> (если есть модель в кэше) или оставь <code>mock</code> для демо.</li>
+      <li>Жми «Сохранить» — UI запишет изменения в <code>.env</code>. Затем перезапусти uvicorn — новые настройки подхватятся.</li>
+    </ol>
+    <p class="t-secondary">Секреты (client_secret, API ключи, webhook'и) в UI отображаются маской <code>****1234</code>. Чтобы не светить — храни их в <code>.env</code> или менеджере секретов.</p>
+  </article>
+
+  <article class="card instructions__step">
+    <h3>Полезные горячие клавиши</h3>
+    <ul>
+      <li><kbd>Ctrl/⌘ + Enter</kbd> в поле ассистента — отправить.</li>
+      <li><kbd>Esc</kbd> — закрыть модалку.</li>
+    </ul>
+  </article>
+</section>

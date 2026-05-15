@@ -1,0 +1,30 @@
+<section data-page="pii">
+  <header class="page-header">
+    <div>
+      <h1>PII playground</h1>
+      <div class="page-header__sub">Тест маскирования — встроенные правила + ваши regex</div>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="grid-2" style="align-items: flex-start;">
+      <div>
+        <h4>Исходный текст</h4>
+        <textarea data-slot="input" rows="14" placeholder="Вставьте текст с PII (имя, телефон, e-mail, паспорт, и т.п.)"></textarea>
+        <h4 style="margin-top: var(--space-4);">Дополнительные паттерны</h4>
+        <div data-slot="patterns" class="pii-patterns"></div>
+        <button type="button" class="btn btn--ghost btn--sm" data-slot="add-pattern" style="margin-top: var(--space-2);">+ Добавить паттерн</button>
+        <div class="row" style="margin-top: var(--space-3); gap: var(--space-2);">
+          <button type="button" class="btn btn--primary" data-slot="run">Замаскировать</button>
+          <button type="button" class="btn btn--ghost" data-slot="clear">Очистить</button>
+        </div>
+      </div>
+      <div>
+        <h4>Замаскированный текст</h4>
+        <pre class="code-block" data-slot="masked" style="min-height: 200px;"></pre>
+        <h4 style="margin-top: var(--space-4);">Найденные совпадения</h4>
+        <div data-slot="matches"></div>
+      </div>
+    </div>
+  </div>
+</section>

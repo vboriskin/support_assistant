@@ -1,0 +1,18 @@
+{
+  "by_module": {
+    "Документы": "support_l2_docs",
+    "Скоринг": "risk_team",
+    "Авторизация": "platform_team",
+    "ДКП": "support_l2_legal",
+    "Решение": "risk_team",
+    "Графики": "support_l2_docs"
+  },
+  "by_type": {
+    "incident": "support_oncall",
+    "access_request": "iam_team",
+    "feature_request": "product_team",
+    "bug": "engineering",
+    "question": "support_l1"
+  },
+  "default": "support_l1"
+}

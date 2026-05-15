@@ -1,0 +1,18 @@
+{
+  "by_module": {
+    "Карты": "support_l2_cards",
+    "Переводы": "support_l2_payments",
+    "Платежи": "support_l2_payments",
+    "Авторизация": "platform_team",
+    "Кэшбек": "support_l2_cards",
+    "Push-уведомления": "support_l1"
+  },
+  "by_type": {
+    "incident": "support_oncall",
+    "access_request": "iam_team",
+    "feature_request": "product_team",
+    "bug": "engineering",
+    "question": "support_l1"
+  },
+  "default": "support_l1"
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_signature_ipad",
+  "category": "ДКП",
+  "edge_case_type": "typical",
+  "query": "Подпись клиента с iPad не подгрузилась в ДКП, что делать",
+  "expected_sources": ["playbook:playbook_signature_ipad", "ticket_summary:KC-10014"],
+  "must_mention": ["известная", "планшет"],
+  "must_not_mention": ["подпишите от имени клиента"],
+  "expected_answer_summary": "Это KI SC-882. Workaround — подпись на планшете в админке. Если 3 раза подряд не получилось — эскалация в legal."
+}

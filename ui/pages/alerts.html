@@ -1,0 +1,22 @@
+<section data-page="alerts">
+  <header class="page-header">
+    <div>
+      <h1>Алёрты</h1>
+      <div class="page-header__sub">Пороги, текущие сигналы и принудительная проверка</div>
+    </div>
+    <button type="button" class="btn btn--primary" data-slot="trigger">Проверить сейчас</button>
+  </header>
+
+  <div class="grid-2" style="align-items: flex-start;">
+    <div class="card">
+      <h3>Сигналы за последний час</h3>
+      <div data-slot="signals"><span class="loader-l2"></span></div>
+    </div>
+    <div class="card">
+      <h3>Текущие нарушения</h3>
+      <div data-slot="violations"></div>
+      <h3 style="margin-top: var(--space-4);">Настройки</h3>
+      <div data-slot="settings" class="t-secondary t-body-small"></div>
+    </div>
+  </div>
+</section>

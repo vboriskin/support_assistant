@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Карты",
+    "tech_lead": "cards.lead@bank.ru",
+    "product_owner": "cards.po@bank.ru",
+    "support_channel": "#cards-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/cards"
+  },
+  {
+    "module": "Переводы",
+    "tech_lead": "payments.lead@bank.ru",
+    "product_owner": "payments.po@bank.ru",
+    "support_channel": "#payments-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/payments"
+  },
+  {
+    "module": "Платежи",
+    "tech_lead": "payments.lead@bank.ru",
+    "product_owner": "payments.po@bank.ru",
+    "support_channel": "#payments-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/payments"
+  },
+  {
+    "module": "Авторизация",
+    "tech_lead": "auth.lead@bank.ru",
+    "product_owner": null,
+    "support_channel": "#auth-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/auth"
+  },
+  {
+    "module": "Кэшбек",
+    "tech_lead": "cards.lead@bank.ru",
+    "product_owner": "loyalty.po@bank.ru",
+    "support_channel": "#cards-l2",
+    "oncall_rotation_url": null
+  },
+  {
+    "module": "Push-уведомления",
+    "tech_lead": "mobile.lead@bank.ru",
+    "product_owner": null,
+    "support_channel": "#mobile-support",
+    "oncall_rotation_url": null
+  }
+]

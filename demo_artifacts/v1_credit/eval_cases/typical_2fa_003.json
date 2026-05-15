@@ -1,0 +1,14 @@
+{
+  "case_id": "typical_2fa_003",
+  "category": "Авторизация",
+  "edge_case_type": "typical",
+  "query": "Менеджер не получает SMS с кодом 2FA",
+  "expected_sources": ["kb_chunk:auth_2fa"],
+  "must_mention": ["+7", "спам"],
+  "must_not_mention": ["переустановите Windows"],
+  "expected_answer_summary": "Проверить формат +7XXXXXXXXXX, проверить спам, попросить через 1 минуту повторить. Если не помогло — iam_team.",
+  "ticket_context": {
+    "subject": "Не приходит SMS",
+    "module": "Авторизация"
+  }
+}

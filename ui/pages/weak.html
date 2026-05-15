@@ -1,0 +1,32 @@
+<section data-page="weak">
+  <header class="page-header">
+    <div>
+      <h1>Слабые ответы</h1>
+      <div class="page-header__sub">Где ассистент проседает: 👎, нет источников, отказ</div>
+    </div>
+  </header>
+
+  <form class="row" data-slot="filters" style="margin-bottom: var(--space-4); align-items: flex-end;">
+    <div class="field">
+      <label>Период</label>
+      <select name="period">
+        <option value="day">сутки</option>
+        <option value="week">неделя</option>
+        <option value="month" selected>месяц</option>
+        <option value="all">всё</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Причина</label>
+      <select name="reason">
+        <option value="all">любая</option>
+        <option value="feedback_negative">👎 feedback</option>
+        <option value="no_sources">нет источников</option>
+        <option value="declined">отказ ассистента</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn--ghost btn--sm">Применить</button>
+  </form>
+
+  <div class="card" data-slot="list-wrap"><span class="loader-l2"></span></div>
+</section>

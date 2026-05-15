@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_010",
+  "category": "typical",
+  "query": "Как загрузить выписку с электронной подписью банка?",
+  "ticket_context": {"module": "Документы"},
+  "expected_sources": ["kb_doc_format_rules", "kb_signed_doc"],
+  "must_mention": ["подпис"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Подписанные PDF принимаются как обычные, но размер с подписью не должен превышать 5 МБ.",
+  "edge_case_type": "typical"
+}

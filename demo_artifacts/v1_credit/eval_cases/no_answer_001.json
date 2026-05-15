@@ -1,0 +1,10 @@
+{
+  "case_id": "no_answer_v1_001",
+  "category": "Прочее",
+  "edge_case_type": "no_answer_in_kb",
+  "query": "Как настроить интеграцию с конкретным БКИ для регионального банка?",
+  "expected_sources": [],
+  "must_mention": ["нет"],
+  "must_not_mention": ["придумаю"],
+  "expected_answer_summary": "Ассистент должен честно сказать, что такой инструкции нет в базе, и предложить завести тикет на L2."
+}

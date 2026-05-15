@@ -1,0 +1,11 @@
+{
+  "case_id": "no_answer_003",
+  "category": "no_answer",
+  "query": "Когда планируется релиз модуля Скоринг 3.0?",
+  "ticket_context": null,
+  "expected_sources": [],
+  "must_mention": [],
+  "must_not_mention": [],
+  "expected_answer_summary": "Roadmap-вопрос; в KB и закрытых тикетах ответа нет — нужен честный отказ и предложение спросить у руководителя.",
+  "edge_case_type": "no_answer_in_kb"
+}

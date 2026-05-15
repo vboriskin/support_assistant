@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_amount_change",
+  "category": "Решение",
+  "edge_case_type": "typical",
+  "query": "Клиент хочет увеличить сумму кредита после одобрения",
+  "expected_sources": ["ticket_summary:KC-10074"],
+  "must_mention": ["новая заявка"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Сумму после одобрения изменить нельзя. Нужна новая заявка — это заново БКИ и УЗ."
+}

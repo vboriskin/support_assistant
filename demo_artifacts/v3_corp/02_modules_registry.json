@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Расчётный счёт",
+    "synonyms": ["рс", "р/с", "счёт", "выписка", "контрагент"],
+    "owner_group": "support_l2_accounts",
+    "urgency_baseline": "normal",
+    "description": "Расчётные операции по счёту юрлица: входящие/исходящие платежи, выписки, контрагенты, комиссии."
+  },
+  {
+    "module": "Договоры",
+    "synonyms": ["эдо", "контур", "диадок", "счёт-фактура", "кэп"],
+    "owner_group": "support_l2_edo",
+    "urgency_baseline": "normal",
+    "description": "Электронный документооборот: входящие, исходящие, подпись КЭП, интеграции (1С, Контур, Диадок)."
+  },
+  {
+    "module": "Зарплатный проект",
+    "synonyms": ["зп", "зарплата", "реестр"],
+    "owner_group": "support_l2_zp",
+    "urgency_baseline": "high",
+    "description": "Выплата ЗП сотрудникам: загрузка реестров, корректировки, отчёты."
+  },
+  {
+    "module": "Налоги",
+    "synonyms": ["усн", "ндс", "пфр", "налог", "кбк"],
+    "owner_group": "support_l2_taxes",
+    "urgency_baseline": "high",
+    "description": "Налоговые платежи: УСН, НДС, ПФР, ФСС. Контроль КБК, ОКТМО, статусов."
+  },
+  {
+    "module": "Эквайринг",
+    "synonyms": ["терминал", "pos", "онлайн-эквайринг", "chargeback"],
+    "owner_group": "support_l2_acquiring",
+    "urgency_baseline": "normal",
+    "description": "Приём платежей в торговых точках (POS) и онлайн. Зачисление, chargeback'и, подключение."
+  },
+  {
+    "module": "Валютные операции",
+    "synonyms": ["swift", "валюта", "138-и", "иностранный"],
+    "owner_group": "support_l2_fx",
+    "urgency_baseline": "normal",
+    "description": "Валютные платежи, конвертация, контракт 138-И, валютный контроль."
+  }
+]

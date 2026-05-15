@@ -1,0 +1,43 @@
+<section class="col" data-page="dashboard">
+  <header class="page-header">
+    <div>
+      <h1>Сводка</h1>
+      <div class="page-header__sub">Статус системы и активность поддержки</div>
+    </div>
+    <div class="period-picker" data-slot="period">
+      <button data-period="day"   type="button">сутки</button>
+      <button data-period="week"  type="button" aria-pressed="true">неделя</button>
+      <button data-period="month" type="button">месяц</button>
+    </div>
+  </header>
+
+  <div class="grid-4" data-slot="kpi">
+    <span class="loader-l2"></span>
+  </div>
+
+  <div class="card">
+    <h3>Тикеты по дням</h3>
+    <div data-slot="timeseries"><span class="loader-l1"></span></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Тикеты по модулям</h3>
+      <div class="bars" data-slot="by-module"><span class="loader-l1"></span></div>
+    </div>
+    <div class="card">
+      <h3>Тикеты по статусам</h3>
+      <div class="bars" data-slot="by-status"><span class="loader-l1"></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Аномалии — рост ≥ 30% от предыдущего периода</h3>
+    <div data-slot="anomalies" class="t-secondary">—</div>
+  </div>
+
+  <div class="card">
+    <h3>Последний ингест</h3>
+    <div data-slot="last-ingest" class="t-secondary">—</div>
+  </div>
+</section>

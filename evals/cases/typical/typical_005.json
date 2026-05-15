@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_005",
+  "category": "typical",
+  "query": "Ошибка интеграции с бюро кредитных историй",
+  "ticket_context": {"module": "Интеграции", "subject": "БКИ не отвечает"},
+  "expected_sources": ["ts_bki_timeout"],
+  "must_mention": ["повторить", "интеграция"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Внешний сервис может тайм-аутить — повторить попытку через 5 минут; если повтор не помогает — эскалировать на 2-ю линию.",
+  "edge_case_type": "typical"
+}

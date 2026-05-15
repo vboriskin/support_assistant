@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_income_2ndfl",
+  "category": "Документы",
+  "edge_case_type": "typical",
+  "query": "OCR не подтянул сумму дохода из 2-НДФЛ, что делать",
+  "expected_sources": ["kb_chunk:income_verification"],
+  "must_mention": ["вручную"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Объяснить про известный баг OCR с 2026-03-20, ввести доход вручную, сохранение не страдает."
+}

@@ -1,0 +1,166 @@
+[
+  {
+    "name": "email_in_text",
+    "input": "Напишите на ivan.petrov@bank.ru до 18:00",
+    "expected_masked": "Напишите на <EMAIL> до 18:00",
+    "expected_audit": {"EMAIL": 1}
+  },
+  {
+    "name": "email_multiple",
+    "input": "Дублирую: alice@example.com и bob+test@bank.ru",
+    "expected_masked": "Дублирую: <EMAIL> и <EMAIL>",
+    "expected_audit": {"EMAIL": 2}
+  },
+  {
+    "name": "phone_plus7_spaces",
+    "input": "Контактный +7 (495) 123-45-67 — звонить днём",
+    "expected_masked": "Контактный <PHONE> — звонить днём",
+    "expected_audit": {"PHONE": 1}
+  },
+  {
+    "name": "phone_8_dashes",
+    "input": "Горячая линия 8-800-555-35-35 круглосуточно",
+    "expected_masked": "Горячая линия <PHONE> круглосуточно",
+    "expected_audit": {"PHONE": 1}
+  },
+  {
+    "name": "phone_two_in_text",
+    "input": "Звонить +7 (495) 123-45-67 или 8 800 555 35 35",
+    "expected_masked": "Звонить <PHONE> или <PHONE>",
+    "expected_audit": {"PHONE": 2}
+  },
+  {
+    "name": "card_16_spaces",
+    "input": "Списание с карты 4276 1234 5678 9012 на сумму",
+    "expected_masked": "Списание с карты <CARD> на сумму",
+    "expected_audit": {"CARD": 1}
+  },
+  {
+    "name": "card_16_dashes",
+    "input": "Карта 5536-9100-1234-5678 заблокирована",
+    "expected_masked": "Карта <CARD> заблокирована",
+    "expected_audit": {"CARD": 1}
+  },
+  {
+    "name": "account_20_digits",
+    "input": "Счёт получателя 40817810099910004312, БИК указан",
+    "expected_masked": "Счёт получателя <ACCOUNT>, БИК указан",
+    "expected_audit": {"ACCOUNT": 1}
+  },
+  {
+    "name": "snils",
+    "input": "СНИЛС: 123-456-789 01 не проходит",
+    "expected_masked": "СНИЛС: <SNILS> не проходит",
+    "expected_audit": {"SNILS": 1}
+  },
+  {
+    "name": "inn_with_label",
+    "input": "Проверьте ИНН 7707083893 контрагента",
+    "expected_masked": "Проверьте ИНН <INN> контрагента",
+    "expected_audit": {"INN": 1}
+  },
+  {
+    "name": "inn_12_digits",
+    "input": "ИНН: 123456789012 — физлицо",
+    "expected_masked": "ИНН: <INN> — физлицо",
+    "expected_audit": {"INN": 1}
+  },
+  {
+    "name": "passport_with_label",
+    "input": "Паспорт 4500 123456 предъявлен",
+    "expected_masked": "Паспорт <PASSPORT> предъявлен",
+    "expected_audit": {"PASSPORT": 1}
+  },
+  {
+    "name": "application_id_app_prefix",
+    "input": "По заявке APP-87654321 требуется решение",
+    "expected_masked": "По заявке <APPLICATION_ID> требуется решение",
+    "expected_audit": {"APPLICATION_ID": 1}
+  },
+  {
+    "name": "application_id_zpk_prefix",
+    "input": "Заявка ЗПК-2026001 в работе",
+    "expected_masked": "Заявка <APPLICATION_ID> в работе",
+    "expected_audit": {"APPLICATION_ID": 1}
+  },
+  {
+    "name": "application_id_in_context",
+    "input": "Уточните по заявке № 1234567 — что со статусом?",
+    "expected_masked": "Уточните по заявке № <APPLICATION_ID> — что со статусом?",
+    "expected_audit": {"APPLICATION_ID": 1}
+  },
+  {
+    "name": "amount_long_format",
+    "input": "Сумма кредита 1 500 000 руб., ежемесячно 35 000 ₽",
+    "expected_masked": "Сумма кредита <AMOUNT>, ежемесячно <AMOUNT>",
+    "expected_audit": {"AMOUNT": 2}
+  },
+  {
+    "name": "amount_compact",
+    "input": "Списали 12345.67 ₽ без основания",
+    "expected_masked": "Списали <AMOUNT> без основания",
+    "expected_audit": {"AMOUNT": 1}
+  },
+  {
+    "name": "birth_date_context",
+    "input": "Дата рождения: 12.05.1985, документ просрочен",
+    "expected_masked": "Дата рождения: <BIRTH_DATE>, документ просрочен",
+    "expected_audit": {"BIRTH_DATE": 1}
+  },
+  {
+    "name": "birth_date_short_form",
+    "input": "Клиент г.р. 01/07/1990 запросил справку",
+    "expected_masked": "Клиент г.р. <BIRTH_DATE> запросил справку",
+    "expected_audit": {"BIRTH_DATE": 1}
+  },
+  {
+    "name": "user_login_internal_domain",
+    "input": "Тикет назначен на ivan.petrov@corp — ожидаю ответа",
+    "expected_masked": "Тикет назначен на <USER_LOGIN> — ожидаю ответа",
+    "expected_audit": {"USER_LOGIN": 1}
+  },
+  {
+    "name": "no_pii_plain_text",
+    "input": "Не работает кнопка «Сохранить» в модуле скоринга",
+    "expected_masked": "Не работает кнопка «Сохранить» в модуле скоринга",
+    "expected_audit": {}
+  },
+  {
+    "name": "module_name_is_not_pii",
+    "input": "Проблема в модуле «Андеррайтинг» при отправке выписки",
+    "expected_masked": "Проблема в модуле «Андеррайтинг» при отправке выписки",
+    "expected_audit": {}
+  },
+  {
+    "name": "error_codes_not_pii",
+    "input": "Получаю ORA-12345 и ERROR_VALIDATION_FAILED при сабмите",
+    "expected_masked": "Получаю ORA-12345 и ERROR_VALIDATION_FAILED при сабмите",
+    "expected_audit": {}
+  },
+  {
+    "name": "mixed_regex_only",
+    "input": "Заявка APP-12345: списание 500 000 руб., email клиента ivan@bank.ru, тел. +7-495-123-45-67",
+    "expected_masked": "Заявка <APPLICATION_ID>: списание <AMOUNT>, email клиента <EMAIL>, тел. <PHONE>",
+    "expected_audit": {"APPLICATION_ID": 1, "AMOUNT": 1, "EMAIL": 1, "PHONE": 1}
+  },
+  {
+    "name": "person_simple",
+    "input": "Уважаемая Иванова Мария Петровна, ваш запрос принят.",
+    "expected_masked": "Уважаемая <PERSON>, ваш запрос принят.",
+    "expected_audit": {"PERSON": 1},
+    "requires_ner": true
+  },
+  {
+    "name": "person_plus_phone",
+    "input": "Свяжитесь с Петров Сергей Иванович по номеру +7 (812) 999-88-77.",
+    "expected_masked": "Свяжитесь с <PERSON> по номеру <PHONE>.",
+    "expected_audit": {"PERSON": 1, "PHONE": 1},
+    "requires_ner": true
+  },
+  {
+    "name": "address_in_context",
+    "input": "Документы привезли по адресу: г. Москва, ул. Тверская, дом 1",
+    "expected_audit_at_least": {"ADDRESS": 1},
+    "requires_ner": true
+  }
+]

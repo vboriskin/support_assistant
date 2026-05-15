@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Карты",
+    "synonyms": ["карта", "виртуалка", "пластик", "cvv", "лимиты", "apple pay", "google pay"],
+    "owner_group": "support_l2_cards",
+    "urgency_baseline": "normal",
+    "description": "Дебетовые и кредитные карты: выпуск, блокировка, лимиты, токенизация (Apple/Google Pay)."
+  },
+  {
+    "module": "Переводы",
+    "synonyms": ["перевод", "сбп", "swift", "iban", "контакт"],
+    "owner_group": "support_l2_payments",
+    "urgency_baseline": "high",
+    "description": "Переводы между своими счетами, СБП по номеру телефона, переводы за рубеж (если доступны)."
+  },
+  {
+    "module": "Платежи",
+    "synonyms": ["оплата", "жкх", "qr", "штрафы", "коммуналка"],
+    "owner_group": "support_l2_payments",
+    "urgency_baseline": "normal",
+    "description": "Оплата услуг: ЖКХ, мобильная связь, штрафы, налоги, оплата по QR/реквизитам."
+  },
+  {
+    "module": "Авторизация",
+    "synonyms": ["вход", "пароль", "face id", "touch id", "pin", "esia"],
+    "owner_group": "platform_team",
+    "urgency_baseline": "high",
+    "description": "Вход в мобильное приложение: PIN, биометрия, ЕСИА, смена устройства."
+  },
+  {
+    "module": "Кэшбек",
+    "synonyms": ["cashback", "категории", "баллы", "рубли", "программа лояльности"],
+    "owner_group": "support_l2_cards",
+    "urgency_baseline": "low",
+    "description": "Программа кэшбека: категории, лимиты, начисление, конвертация в рубли/баллы."
+  },
+  {
+    "module": "Push-уведомления",
+    "synonyms": ["push", "пуш", "уведомления", "нотификации"],
+    "owner_group": "support_l1",
+    "urgency_baseline": "low",
+    "description": "Push о транзакциях, операциях по карте, акциях. Настройки в самом приложении + в ОС."
+  }
+]

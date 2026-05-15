@@ -1,0 +1,15 @@
+{
+  "case_id": "typical_001",
+  "category": "typical",
+  "query": "Не загружается выписка PDF, пишет ошибку валидации",
+  "ticket_context": {
+    "module": "Документы",
+    "subject": "Не загружается выписка",
+    "description": "При загрузке PDF возникает ошибка валидации"
+  },
+  "expected_sources": ["ts_pdf_validation_5mb", "kb_doc_format_rules"],
+  "must_mention": ["размер", "формат"],
+  "must_not_mention": ["не знаю", "обратитесь к разработчикам"],
+  "expected_answer_summary": "Проверить размер файла (до 5 МБ), формат (PDF/A), отсутствие сканированных страниц без OCR. Если проверки пройдены — переоткрыть страницу.",
+  "edge_case_type": "typical"
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_cashback",
+  "category": "Кэшбек",
+  "edge_case_type": "typical",
+  "query": "Клиент потратил 5000 ₽ на рестораны, кэшбек не пришёл, прошёл час",
+  "expected_sources": ["kb_chunk:cashback_rules"],
+  "must_mention": ["до конца следующего рабочего дня"],
+  "must_not_mention": ["обманули клиента"],
+  "expected_answer_summary": "Объяснить, что кэшбек приходит до конца следующего рабочего дня, не сразу. Перечислить причины ненаступления."
+}

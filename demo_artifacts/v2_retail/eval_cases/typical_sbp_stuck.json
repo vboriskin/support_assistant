@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_sbp_stuck",
+  "category": "Переводы",
+  "edge_case_type": "typical",
+  "query": "Клиент перевёл 5000 ₽ по СБП 30 минут назад, висит «в обработке»",
+  "expected_sources": ["kb_chunk:sbp_transfer"],
+  "must_mention": ["2 часа"],
+  "must_not_mention": ["сделать chargeback", "повторите перевод"],
+  "expected_answer_summary": "Объяснить, что СБП может зависать; деньги вернутся или проведутся в течение 2 часов; повтор не делать."
+}

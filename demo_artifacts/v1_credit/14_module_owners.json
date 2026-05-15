@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Документы",
+    "tech_lead": "ivanov.it@bank.ru",
+    "product_owner": "petrova.po@bank.ru",
+    "support_channel": "#docs-support",
+    "oncall_rotation_url": "https://oncall.internal/teams/docs"
+  },
+  {
+    "module": "Скоринг",
+    "tech_lead": "kuznetsov.it@bank.ru",
+    "product_owner": "smirnova.po@bank.ru",
+    "support_channel": "#risk-support",
+    "oncall_rotation_url": "https://oncall.internal/teams/risk"
+  },
+  {
+    "module": "Авторизация",
+    "tech_lead": "popov.it@bank.ru",
+    "product_owner": null,
+    "support_channel": "#iam-support",
+    "oncall_rotation_url": "https://oncall.internal/teams/iam"
+  },
+  {
+    "module": "ДКП",
+    "tech_lead": "sidorov.it@bank.ru",
+    "product_owner": "vasileva.po@bank.ru",
+    "support_channel": "#legal-support",
+    "oncall_rotation_url": null
+  },
+  {
+    "module": "Решение",
+    "tech_lead": "kuznetsov.it@bank.ru",
+    "product_owner": "smirnova.po@bank.ru",
+    "support_channel": "#risk-support",
+    "oncall_rotation_url": "https://oncall.internal/teams/risk"
+  },
+  {
+    "module": "Графики",
+    "tech_lead": "morozov.it@bank.ru",
+    "product_owner": "petrova.po@bank.ru",
+    "support_channel": "#docs-support",
+    "oncall_rotation_url": null
+  }
+]

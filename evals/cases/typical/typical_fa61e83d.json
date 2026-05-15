@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_fa61e83d",
+  "category": "typical",
+  "query": "333",
+  "ticket_context": null,
+  "expected_sources": [],
+  "must_mention": [],
+  "must_not_mention": [],
+  "expected_answer_summary": "",
+  "edge_case_type": "typical"
+}

@@ -1,0 +1,23 @@
+<section class="col" data-page="artifacts">
+  <header class="page-header">
+    <div>
+      <h1>Артефакты от команды поддержки</h1>
+      <div class="page-header__sub">
+        Что мы хотим получить от L1/L2, зачем это нужно ассистенту, как доставить — и где есть готовый импорт.
+      </div>
+    </div>
+  </header>
+
+  <div class="row" style="gap: var(--space-2); margin-bottom: var(--space-4); flex-wrap: wrap;">
+    <button type="button" class="btn btn--ghost btn--sm is-selected" data-filter="all">Все</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="critical">Критично</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="kb">База знаний</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="quality">Качество</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="analytics">Аналитика</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="process">Процессы</button>
+    <span style="flex: 1;"></span>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="importable">⚡ Только с готовым импортом</button>
+  </div>
+
+  <div data-slot="artifacts"></div>
+</section>

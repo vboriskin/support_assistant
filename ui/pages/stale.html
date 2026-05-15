@@ -1,0 +1,22 @@
+<section data-page="stale">
+  <header class="page-header">
+    <div>
+      <h1>Устаревшее KB</h1>
+      <div class="page-header__sub">Статьи, которые давно не обновлялись и/или вызывают негативный feedback</div>
+    </div>
+  </header>
+
+  <form class="row" data-slot="filters" style="margin-bottom: var(--space-4); align-items: flex-end;">
+    <div class="field">
+      <label>Не обновлялась N месяцев</label>
+      <input name="months" type="number" min="1" max="36" value="6">
+    </div>
+    <label class="row" style="align-items: center; gap: var(--space-2);">
+      <input type="checkbox" name="only_with_negative_feedback" value="true">
+      <span>Только с 👎</span>
+    </label>
+    <button type="submit" class="btn btn--ghost btn--sm">Применить</button>
+  </form>
+
+  <div class="card" data-slot="list-wrap"><span class="loader-l2"></span></div>
+</section>

@@ -1,0 +1,10 @@
+{
+  "case_id": "ambiguous_pti",
+  "category": "Скоринг",
+  "edge_case_type": "ambiguous",
+  "query": "У клиента доход 80к, текущая нагрузка 35к, наш платёж будет 25к — пройдёт?",
+  "expected_sources": ["kb_chunk:restrictions_under_18_credit"],
+  "must_mention": ["50%", "PTI"],
+  "must_not_mention": ["точно одобрят", "точно откажут"],
+  "expected_answer_summary": "PTI = (35+25)/80 = 75%, выше порога 50%. Скорее всего откажут или попросят созаёмщика. Но пограничные случаи решает УЗ."
+}

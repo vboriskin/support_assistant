@@ -1,0 +1,14 @@
+{
+  "case_id": "typical_tech_refuse_002",
+  "category": "Скоринг",
+  "edge_case_type": "typical",
+  "query": "Заявка получила технический отказ, клиент звонит и требует объяснений",
+  "expected_sources": ["kb_chunk:scoring_rerun", "ticket_summary:KC-10009"],
+  "must_mention": ["технический отказ", "не отказ клиенту", "10 минут"],
+  "must_not_mention": ["клиент в чёрном списке"],
+  "expected_answer_summary": "Объяснить, что tech_refuse — недоступность внешнего сервиса, не отказ. Перезапустить через 10 минут. При повторе — ручная проверка.",
+  "ticket_context": {
+    "subject": "Технический отказ",
+    "module": "Скоринг"
+  }
+}

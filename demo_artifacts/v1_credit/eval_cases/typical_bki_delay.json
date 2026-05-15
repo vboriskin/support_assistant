@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_bki_delay",
+  "category": "Скоринг",
+  "edge_case_type": "typical",
+  "query": "БКИ-проверка висит 30 минут, обычно 1-2 минуты, что делать",
+  "expected_sources": ["kb_chunk:bki_request"],
+  "must_mention": ["БКИ"],
+  "must_not_mention": ["перезапустите", "отмените"],
+  "expected_answer_summary": "Это задержка на стороне внешнего БКИ. Не отменять — деньги за запрос уже потрачены. Если >30 мин — tech_refuse, пересчитать."
+}

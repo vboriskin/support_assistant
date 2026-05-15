@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_006",
+  "category": "typical",
+  "query": "Как сбросить пароль пользователю системы?",
+  "ticket_context": null,
+  "expected_sources": ["kb_password_reset"],
+  "must_mention": ["пароль"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Через админку: найти пользователя, нажать «Сбросить пароль», временный пароль придёт на корпоративный email.",
+  "edge_case_type": "typical"
+}

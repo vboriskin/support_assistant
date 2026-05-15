@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_payment_date",
+  "category": "Графики",
+  "edge_case_type": "typical",
+  "query": "Можно ли поменять дату ежемесячного платежа",
+  "expected_sources": ["kb_chunk:payment_date_change"],
+  "must_mention": ["1 раз в 6 месяцев", "ЛК"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Да, через ЛК → Мой кредит → Изменить дату. Доступно 1 раз в полгода. Дата не позже 28-го числа."
+}

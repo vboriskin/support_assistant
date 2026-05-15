@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_009",
+  "category": "typical",
+  "query": "Почему форма скоринга не сохраняет введённые данные?",
+  "ticket_context": {"module": "Скоринг"},
+  "expected_sources": ["ts_scoring_form_validation"],
+  "must_mention": ["валидация"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Проверить валидационные ошибки в форме — обычно подсвечены красным; чаще всего проблема в формате суммы или даты.",
+  "edge_case_type": "typical"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Расчётный счёт",
+    "tech_lead": "accounts.lead@bank.ru",
+    "product_owner": "accounts.po@bank.ru",
+    "support_channel": "#corp-accounts-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/accounts"
+  },
+  {
+    "module": "Договоры",
+    "tech_lead": "edo.lead@bank.ru",
+    "product_owner": "edo.po@bank.ru",
+    "support_channel": "#edo-l2",
+    "oncall_rotation_url": null
+  },
+  {
+    "module": "Зарплатный проект",
+    "tech_lead": "zp.lead@bank.ru",
+    "product_owner": "zp.po@bank.ru",
+    "support_channel": "#zp-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/zp"
+  },
+  {
+    "module": "Налоги",
+    "tech_lead": "tax.lead@bank.ru",
+    "product_owner": null,
+    "support_channel": "#tax-l2",
+    "oncall_rotation_url": null
+  },
+  {
+    "module": "Эквайринг",
+    "tech_lead": "acquiring.lead@bank.ru",
+    "product_owner": "acquiring.po@bank.ru",
+    "support_channel": "#acquiring-l2",
+    "oncall_rotation_url": "https://oncall.internal/teams/acquiring"
+  },
+  {
+    "module": "Валютные операции",
+    "tech_lead": "fx.lead@bank.ru",
+    "product_owner": "fx.po@bank.ru",
+    "support_channel": "#fx-l2",
+    "oncall_rotation_url": null
+  }
+]

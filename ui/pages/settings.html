@@ -1,0 +1,22 @@
+<section data-page="settings">
+  <header class="page-header">
+    <div>
+      <h1>Настройки</h1>
+      <div class="page-header__sub" data-slot="env-file">Конфигурация ассистента (читается из <code>.env</code>)</div>
+    </div>
+    <div class="row" style="gap: var(--space-2); flex-wrap: wrap;">
+      <button type="button" class="btn btn--ghost" data-slot="download-diag">Выгрузить логи</button>
+      <button type="button" class="btn btn--ghost" data-slot="hard-refresh">Обновить приложение</button>
+      <button type="button" class="btn btn--ghost" data-slot="reload">Перечитать настройки</button>
+      <button type="button" class="btn btn--primary" data-slot="save">Сохранить</button>
+    </div>
+  </header>
+
+  <div class="row" style="gap: var(--space-2); margin-bottom: var(--space-4); flex-wrap: wrap;" data-slot="group-tabs">
+    <span class="t-secondary t-body-small">Группы:</span>
+  </div>
+
+  <div data-slot="restart-banner" hidden></div>
+
+  <div data-slot="groups"><span class="loader-l2"></span></div>
+</section>

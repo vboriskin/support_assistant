@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_coborrower",
+  "category": "Скоринг",
+  "edge_case_type": "typical",
+  "query": "Скоринг не учёл созаёмщика, что делать",
+  "expected_sources": ["kb_chunk:coborrower", "ticket_summary:KC-10037"],
+  "must_mention": ["добавить", "автоматически"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Объяснить, что созаёмщик добавляется в карточке через «+ Созаёмщик», после чего PD пересчитывается автоматически."
+}

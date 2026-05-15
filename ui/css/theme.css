@@ -1,0 +1,186 @@
+/* ============================================================
+   Theme tokens — палитра, motion, keyframes.
+
+   База — тёмная (web app default по бренд-системе).
+   [data-theme="light"] — явное переключение в светлую.
+   Без data-theme и в auto-режиме — следуем prefers-color-scheme.
+
+   Принцип: светлая тема НЕ инверсия тёмной — каждый цвет имеет
+   парного двойника на той же hue-оси с другой светлотой.
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  /* 3 уровня глубины */
+  --app-bg-base:        #0A0A0F;   /* Night — 60% поверхностей */
+  --app-bg-card:        #1A1A22;   /* Twilight — карты, сайдбар, бабблы */
+  --app-bg-elevated:    #2A2A30;   /* Top layer — hover, разделители, pre */
+
+  /* Текст */
+  --app-text-primary:   #FFFFFF;   /* Star */
+  --app-text-secondary: #5A5A64;   /* Mist */
+  --app-text-muted:     #3A3A44;   /* Tertiary */
+
+  --app-border-subtle:  rgba(255, 255, 255, 0.08);
+  --app-border-default: rgba(255, 255, 255, 0.15);
+
+  /* Signal — яркие на тёмном (только для статусов, не декор) */
+  --app-signal-ok:      #7FE8B5;
+  --app-signal-warning: #FFB347;
+  --app-signal-danger:  #FF6B6B;
+  --app-signal-info:    #6EC1E4;
+  --app-signal-insight: #B084CC;
+
+  --app-signal-ok-bg:      rgba(127, 232, 181, 0.12);
+  --app-signal-warning-bg: rgba(255, 179, 71, 0.12);
+  --app-signal-danger-bg:  rgba(255, 107, 107, 0.12);
+  --app-signal-info-bg:    rgba(110, 193, 228, 0.12);
+  --app-signal-insight-bg: rgba(176, 132, 204, 0.12);
+
+  /* Accent — монохромный. Primary CTA = инверсия фона. */
+  --app-accent:          #FFFFFF;
+  --app-accent-hover:    #E8E8EC;
+  --app-accent-contrast: #0A0A0F;
+}
+
+[data-theme="light"] {
+  --app-bg-base:        #FAFAF8;   /* Paper — тёплый off-white */
+  --app-bg-card:        #FFFFFF;   /* Snow */
+  --app-bg-elevated:    #F0EDE5;   /* Linen — третий слой */
+
+  --app-text-primary:   #1A1A22;   /* Ink — мягче чем #000 */
+  --app-text-secondary: #7A7A82;   /* Stone */
+  --app-text-muted:     #B5B5BC;
+
+  --app-border-subtle:  rgba(26, 26, 34, 0.08);
+  --app-border-default: rgba(26, 26, 34, 0.15);
+
+  --app-signal-ok:      #0F8A5F;
+  --app-signal-warning: #B5670A;
+  --app-signal-danger:  #C13838;
+  --app-signal-info:    #1F6B96;
+  --app-signal-insight: #6B4488;
+
+  --app-signal-ok-bg:      rgba(15, 138, 95, 0.10);
+  --app-signal-warning-bg: rgba(181, 103, 10, 0.10);
+  --app-signal-danger-bg:  rgba(193, 56, 56, 0.10);
+  --app-signal-info-bg:    rgba(31, 107, 150, 0.10);
+  --app-signal-insight-bg: rgba(107, 68, 136, 0.10);
+
+  --app-accent:          #1A1A22;
+  --app-accent-hover:    #2A2A30;
+  --app-accent-contrast: #FAFAF8;
+}
+
+/* Auto-режим: при отсутствии явной темы и системной light — переходим на light */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --app-bg-base:        #FAFAF8;
+    --app-bg-card:        #FFFFFF;
+    --app-bg-elevated:    #F0EDE5;
+
+    --app-text-primary:   #1A1A22;
+    --app-text-secondary: #7A7A82;
+    --app-text-muted:     #B5B5BC;
+
+    --app-border-subtle:  rgba(26, 26, 34, 0.08);
+    --app-border-default: rgba(26, 26, 34, 0.15);
+
+    --app-signal-ok:      #0F8A5F;
+    --app-signal-warning: #B5670A;
+    --app-signal-danger:  #C13838;
+    --app-signal-info:    #1F6B96;
+    --app-signal-insight: #6B4488;
+
+    --app-signal-ok-bg:      rgba(15, 138, 95, 0.10);
+    --app-signal-warning-bg: rgba(181, 103, 10, 0.10);
+    --app-signal-danger-bg:  rgba(193, 56, 56, 0.10);
+    --app-signal-info-bg:    rgba(31, 107, 150, 0.10);
+    --app-signal-insight-bg: rgba(107, 68, 136, 0.10);
+
+    --app-accent:          #1A1A22;
+    --app-accent-hover:    #2A2A30;
+    --app-accent-contrast: #FAFAF8;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Радиусы / тени / spacing / motion-токены.
+   ---------------------------------------------------------------- */
+
+:root {
+  --app-radius-sm: 4px;
+  --app-radius-md: 8px;
+  --app-radius-lg: 12px;
+
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --app-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --app-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Easing из motion-системы бренда */
+  --ease-calm:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: ease-in-out;
+  --ease-decel:  ease-out;
+
+  --duration-quick:      150ms;
+  --duration-base:       240ms;   /* theme transition по бренду */
+  --duration-deliberate: 400ms;
+  --duration-slow:       600ms;
+}
+
+/* Плавный кросс-тематический transition — 240ms decel */
+:root, [data-theme] {
+  transition:
+    background-color var(--duration-base) var(--ease-decel),
+    color var(--duration-base) var(--ease-decel),
+    border-color var(--duration-base) var(--ease-decel),
+    fill var(--duration-base) var(--ease-decel);
+}
+
+/* prefers-reduced-motion: гасим breathe/pulse и transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------------------------------------------------------------
+   Keyframes — breathe / pulse / inline / shimmer / emerge.
+   ---------------------------------------------------------------- */
+
+@keyframes app-breathe {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.04); opacity: 1; }
+}
+
+@keyframes app-pulse-ring {
+  0%   { transform: scale(0.4); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes app-loader-inline {
+  0%, 100% { transform: scale(0.85); opacity: 0.5; }
+  50%      { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes app-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes app-emerge {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}

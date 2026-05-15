@@ -1,0 +1,44 @@
+[
+  {
+    "module": "Документы",
+    "synonyms": ["загрузка", "вложения", "сканы", "файлы", "паспорт", "снилс", "ндфл"],
+    "owner_group": "support_l2_docs",
+    "urgency_baseline": "normal",
+    "description": "Загрузка и хранение клиентских документов (PDF, JPEG, HEIC). OCR паспортных данных."
+  },
+  {
+    "module": "Скоринг",
+    "synonyms": ["скор", "PD", "решение", "оценка"],
+    "owner_group": "risk_team",
+    "urgency_baseline": "high",
+    "description": "Автоматическая оценка кредитного риска: расчёт PD, технический скоринг, rerun."
+  },
+  {
+    "module": "Авторизация",
+    "synonyms": ["вход", "пароль", "2FA", "SMS", "блокировка"],
+    "owner_group": "platform_team",
+    "urgency_baseline": "high",
+    "description": "Логин менеджера, 2FA по SMS, сброс пароля, разблокировка через IAM."
+  },
+  {
+    "module": "ДКП",
+    "synonyms": ["договор", "соглашение", "купля-продажа", "подпись"],
+    "owner_group": "support_l2_legal",
+    "urgency_baseline": "normal",
+    "description": "Формирование и подписание договора кредита-продажи (PDF, e-sign)."
+  },
+  {
+    "module": "Решение",
+    "synonyms": ["статус", "очередь", "ручная проверка"],
+    "owner_group": "risk_team",
+    "urgency_baseline": "normal",
+    "description": "Статусная модель заявки, переход «на решении» → «одобрено/отказ»."
+  },
+  {
+    "module": "Графики",
+    "synonyms": ["платежи", "расчёт", "аннуитет", "досрочное"],
+    "owner_group": "support_l2_docs",
+    "urgency_baseline": "low",
+    "description": "Расчёт графика платежей, отображение в личном кабинете клиента."
+  }
+]

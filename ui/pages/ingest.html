@@ -1,0 +1,21 @@
+<section data-page="ingest">
+  <header class="page-header">
+    <div>
+      <h1>Ингест тикетов</h1>
+      <div class="page-header__sub">Загрузка CSV-выгрузки в индекс ассистента</div>
+    </div>
+  </header>
+
+  <label class="dropzone" data-slot="dropzone">
+    <input type="file" accept=".csv" />
+    <div>
+      <strong>Перетащите CSV-файл</strong> или нажмите, чтобы выбрать
+      <div class="t-secondary" style="margin-top: var(--space-2);">
+        Контракт CSV — в README → docs/03-DATA-MODELS.md
+      </div>
+    </div>
+  </label>
+
+  <h3 style="margin-top: var(--space-6);">Прогоны</h3>
+  <div class="card" data-slot="jobs"><span class="loader-l2"></span></div>
+</section>

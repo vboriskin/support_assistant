@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_kep_001",
+  "category": "Договоры",
+  "edge_case_type": "typical",
+  "query": "Бухгалтер не может подписать счёт в ЭДО — Контур пишет про сертификат",
+  "expected_sources": ["kb_chunk:edo_kep_renewal"],
+  "must_mention": ["КЭП", "год"],
+  "must_not_mention": ["переустановите Windows"],
+  "expected_answer_summary": "Объяснить, что КЭП истекла (срок 1 год). Продлить через УЦ, после получения установить через КриптоПро."
+}

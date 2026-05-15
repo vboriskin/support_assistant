@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_under_age",
+  "category": "Решение",
+  "edge_case_type": "typical",
+  "query": "Клиенту 20 лет, можно ли подать заявку",
+  "expected_sources": ["kb_chunk:restrictions_under_18_credit"],
+  "must_mention": ["21"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Минимальный возраст — 21 год на дату подачи. Клиенту в 20 лет — отказ по возрасту."
+}

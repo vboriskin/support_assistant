@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_004",
+  "category": "typical",
+  "query": "Где посмотреть статус заявки клиента?",
+  "ticket_context": {"module": "Решение"},
+  "expected_sources": ["kb_application_status"],
+  "must_mention": ["статус"],
+  "must_not_mention": [],
+  "expected_answer_summary": "В карточке заявки на странице «Решение», поле «Статус».",
+  "edge_case_type": "typical"
+}

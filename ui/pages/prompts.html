@@ -1,0 +1,45 @@
+<section data-page="prompts">
+  <header class="page-header">
+    <div>
+      <h1>Prompt playground</h1>
+      <div class="page-header__sub">Версии системного промпта + sandbox-сравнение ответа</div>
+    </div>
+  </header>
+
+  <div class="card">
+    <h3>Версии</h3>
+    <div data-slot="versions"><span class="loader-l2"></span></div>
+  </div>
+
+  <div class="card" style="margin-top: var(--space-4);">
+    <h3>Sandbox</h3>
+    <div class="grid-2" style="align-items: flex-start;">
+      <div>
+        <h4>Промпт A (baseline / активная)</h4>
+        <textarea data-slot="prompt-a" rows="14"></textarea>
+      </div>
+      <div>
+        <h4>Промпт B (черновик)</h4>
+        <textarea data-slot="prompt-b" rows="14"></textarea>
+      </div>
+    </div>
+
+    <div class="row" style="gap: var(--space-3); margin-top: var(--space-4); align-items: flex-end;">
+      <div class="field" style="flex: 1;">
+        <label>Eval-кейс (опционально)</label>
+        <select data-slot="case-select"><option value="">— нет, использую запрос ниже —</option></select>
+      </div>
+      <div class="field" style="flex: 2;">
+        <label>Запрос</label>
+        <input data-slot="query" placeholder="Тестовый запрос">
+      </div>
+      <button type="button" class="btn btn--primary" data-slot="run">Сравнить</button>
+      <button type="button" class="btn btn--ghost" data-slot="save-b">Сохранить B как версию</button>
+    </div>
+
+    <div class="grid-2" style="align-items: flex-start; margin-top: var(--space-4);">
+      <div class="card" data-slot="result-a"><div class="empty-state">Запустите сравнение</div></div>
+      <div class="card" data-slot="result-b"><div class="empty-state">Запустите сравнение</div></div>
+    </div>
+  </div>
+</section>

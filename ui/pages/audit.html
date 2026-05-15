@@ -1,0 +1,26 @@
+<section data-page="audit">
+  <header class="page-header">
+    <div>
+      <h1>Аудит</h1>
+      <div class="page-header__sub">Кто, когда и что менял через API</div>
+    </div>
+  </header>
+
+  <form class="row" data-slot="filters" style="margin-bottom: var(--space-4); align-items: flex-end;">
+    <div class="field">
+      <label>Пользователь</label>
+      <input name="user_id" placeholder="X-User-Id">
+    </div>
+    <div class="field">
+      <label>Действие</label>
+      <input name="action" placeholder="post:kb">
+    </div>
+    <div class="field">
+      <label>Тип объекта</label>
+      <input name="target_type" placeholder="kb">
+    </div>
+    <button type="submit" class="btn btn--ghost btn--sm">Применить</button>
+  </form>
+
+  <div class="card" data-slot="list-wrap"><span class="loader-l2"></span></div>
+</section>

@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_one_kopeyka",
+  "category": "Графики",
+  "edge_case_type": "typical",
+  "query": "В ЛК клиента платёж 24543.01, в договоре 24543.00, на копейку разница",
+  "expected_sources": ["kb_chunk:payment_schedule", "playbook:playbook_payment_amount_diff"],
+  "must_mention": ["округление"],
+  "must_not_mention": ["ошибка"],
+  "expected_answer_summary": "Объяснить про округление аннуитета до копейки. Последний платёж компенсирует погрешность. Итог = по договору."
+}

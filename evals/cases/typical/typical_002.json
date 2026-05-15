@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_002",
+  "category": "typical",
+  "query": "После клика по «Рассчитать» страница скоринга виснет",
+  "ticket_context": {"module": "Скоринг", "subject": "Зависает скоринг"},
+  "expected_sources": ["ts_scoring_session_expired"],
+  "must_mention": ["сессия", "обновить"],
+  "must_not_mention": ["не знаю"],
+  "expected_answer_summary": "Истёкший токен сессии — попросить пользователя обновить страницу или перелогиниться. Если повторяется — собрать скриншот консоли и завести задачу в разработку.",
+  "edge_case_type": "typical"
+}

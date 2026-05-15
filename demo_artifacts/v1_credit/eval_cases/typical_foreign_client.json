@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_foreign_client",
+  "category": "Документы",
+  "edge_case_type": "typical",
+  "query": "Иностранец с РВП хочет подать заявку, какие документы нужны",
+  "expected_sources": ["kb_chunk:foreign_clients"],
+  "must_mention": ["РВП", "перевод"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Принимаются клиенты с РВП/ВНЖ. Документы: паспорт страны + нотариальный перевод, РВП, миграционная карта, ИНН, подтверждение дохода в РФ за 12 мес."
+}

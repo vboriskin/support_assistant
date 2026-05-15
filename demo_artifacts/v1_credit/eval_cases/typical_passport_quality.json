@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_passport_quality",
+  "category": "Документы",
+  "edge_case_type": "typical",
+  "query": "Андеррайтер прислал чёрно-белый скан паспорта, клиент далеко",
+  "expected_sources": ["kb_chunk:passport_scan_rules"],
+  "must_mention": ["цветной"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Объяснить, что ч/б не принимается по 115-ФЗ. Запросить цветной скан или предложить временное удостоверение."
+}

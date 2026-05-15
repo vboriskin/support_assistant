@@ -1,0 +1,62 @@
+[
+  {
+    "label": "APPLICATION_ID",
+    "pattern": "\\bKC-\\d{5,8}\\b",
+    "description": "Идентификатор заявки (формат KC-12345)."
+  },
+  {
+    "label": "CONTRACT_NO",
+    "pattern": "\\bКД-\\d{4}/\\d{4,6}\\b",
+    "description": "Номер кредитного договора (КД-2026/000123)."
+  },
+  {
+    "label": "BKI_CHECK_ID",
+    "pattern": "\\bBKI-[A-Z0-9]{12,16}\\b",
+    "description": "ID запроса в БКИ."
+  },
+  {
+    "label": "SCORING_REQUEST_ID",
+    "pattern": "\\bSCR-[a-f0-9]{32}\\b",
+    "description": "UUID запроса в скоринговый сервис (в логах)."
+  },
+  {
+    "label": "FSSP_CHECK_ID",
+    "pattern": "\\bFSSP-\\d{8,12}\\b",
+    "description": "ID запроса в ФССП."
+  },
+  {
+    "label": "MANAGER_ID",
+    "pattern": "\\bMGR-\\d{6,10}\\b",
+    "description": "Внутренний идентификатор менеджера в системе."
+  },
+  {
+    "label": "CARD_PAN_PLEDGE",
+    "pattern": "\\b\\d{4}\\s\\*{4}\\s\\*{4}\\s\\d{4}\\b",
+    "description": "Маска номера карты, на которую идёт выдача (вид «4276 **** **** 1234»)."
+  },
+  {
+    "label": "RUSSIAN_PASSPORT",
+    "pattern": "\\b\\d{2}\\s?\\d{2}\\s?\\d{6}\\b",
+    "description": "Серия и номер паспорта РФ (4+6 цифр)."
+  },
+  {
+    "label": "SNILS",
+    "pattern": "\\b\\d{3}-\\d{3}-\\d{3}[\\s-]\\d{2}\\b",
+    "description": "Номер СНИЛС в формате 123-456-789 00."
+  },
+  {
+    "label": "INN_INDIVIDUAL",
+    "pattern": "\\b\\d{12}\\b",
+    "description": "ИНН физлица (12 цифр)."
+  },
+  {
+    "label": "EMPLOYER_NAME",
+    "pattern": "(?i)\\b(ООО|ЗАО|ПАО|АО|ИП)\\s\\\"[А-Яа-я0-9\\s-]{2,50}\\\"\\b",
+    "description": "Название работодателя в формате «ООО \"Ромашка\"»."
+  },
+  {
+    "label": "INTERNAL_TICKET_REF",
+    "pattern": "\\b(JIRA|RISK|DOCS|SC|LEGAL|MOBILE)-\\d{2,6}\\b",
+    "description": "Ссылка на тикет в Jira-проекте (не PII, но удобно маскировать в публичных каналах)."
+  }
+]

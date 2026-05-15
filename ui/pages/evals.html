@@ -1,0 +1,46 @@
+<section data-page="evals">
+  <header class="page-header">
+    <div>
+      <h1>Evals</h1>
+      <div class="page-header__sub">Прогон эталонных кейсов и метрик</div>
+    </div>
+  </header>
+
+  <div class="card">
+    <h3>Запустить прогон</h3>
+    <form class="row" data-slot="run-form" style="margin-top: var(--space-3);">
+      <div class="field">
+        <label>Набор кейсов</label>
+        <input name="case_set" value="default">
+      </div>
+      <div class="field">
+        <label>Sample size</label>
+        <input name="sample_size" type="number" min="1" placeholder="полный набор">
+      </div>
+      <button type="submit" class="btn btn--primary">Запустить</button>
+    </form>
+    <div class="t-secondary" style="margin-top: var(--space-3);" data-slot="run-result">
+      Полная реализация — на этапе 12 (Evals runner). Пока endpoint возвращает 501.
+    </div>
+  </div>
+
+  <h3 style="margin-top: var(--space-6);">Сравнение прогонов</h3>
+  <div class="card">
+    <form class="row" data-slot="diff-form" style="gap: var(--space-3); align-items: flex-end;">
+      <div class="field" style="flex: 1;">
+        <label>Run A</label>
+        <select name="a" data-slot="diff-a"></select>
+      </div>
+      <div class="field" style="flex: 1;">
+        <label>Run B</label>
+        <select name="b" data-slot="diff-b"></select>
+      </div>
+      <button type="submit" class="btn btn--primary">Сравнить</button>
+    </form>
+    <div data-slot="diff-result" style="margin-top: var(--space-4);"></div>
+  </div>
+
+  <h3 style="margin-top: var(--space-6);">История прогонов</h3>
+  <div class="card" data-slot="runs"><span class="loader-l2"></span></div>
+  <div data-slot="run-detail" style="margin-top: var(--space-4);"></div>
+</section>

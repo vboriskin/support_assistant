@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_zp_registry",
+  "category": "Зарплатный проект",
+  "edge_case_type": "typical",
+  "query": "Реестр ЗП не загружается — пишет «Неверный формат», хотя раньше всё работало",
+  "expected_sources": ["kb_chunk:zp_registry_format", "ticket_summary:CB-30003"],
+  "must_mention": ["v3.2", "1 апреля"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Старый шаблон v3.1 не принимается с 2026-04-01. Скачать актуальный v3.2 из кабинета."
+}

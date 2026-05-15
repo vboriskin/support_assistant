@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_008",
+  "category": "typical",
+  "query": "В андеррайтинге не отображается история обращений клиента",
+  "ticket_context": {"module": "Андеррайтинг"},
+  "expected_sources": ["ts_underwriting_history_cache"],
+  "must_mention": ["кэш", "обновить"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Кэш на стороне приложения; нужно нажать «Обновить» или перелогиниться. Если повторяется — заявка в разработку.",
+  "edge_case_type": "typical"
+}

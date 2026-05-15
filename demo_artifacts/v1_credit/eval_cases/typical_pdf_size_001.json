@@ -1,0 +1,15 @@
+{
+  "case_id": "typical_pdf_size_001",
+  "category": "Документы",
+  "edge_case_type": "typical",
+  "query": "Клиент не может загрузить скан паспорта, файл 12 МБ",
+  "expected_sources": ["kb_chunk:doc_loading_pdf_size"],
+  "must_mention": ["10 МБ", "сжать"],
+  "must_not_mention": ["передать в IT", "перезагрузить компьютер"],
+  "expected_answer_summary": "Объяснить ограничение 10 МБ, предложить сжать PDF (Acrobat / онлайн), если не помогает — эскалация на support_l2_docs.",
+  "ticket_context": {
+    "subject": "Не грузится паспорт",
+    "description": "Андеррайтер не может прикрепить файл, размер 12 МБ, ошибка 500.",
+    "module": "Документы"
+  }
+}

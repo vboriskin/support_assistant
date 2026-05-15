@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_007",
+  "category": "typical",
+  "query": "Подписание документа не отправляется",
+  "ticket_context": {"module": "Подписание"},
+  "expected_sources": ["ts_sign_certificate_expired"],
+  "must_mention": ["сертификат"],
+  "must_not_mention": [],
+  "expected_answer_summary": "Проверить срок действия сертификата подписи — после истечения нужно обновить.",
+  "edge_case_type": "typical"
+}

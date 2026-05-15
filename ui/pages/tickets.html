@@ -1,0 +1,35 @@
+<section data-page="tickets">
+  <header class="page-header">
+    <div>
+      <h1>Тикеты</h1>
+      <div class="page-header__sub">Что лежит в индексе ассистента</div>
+    </div>
+  </header>
+
+  <form class="row" data-slot="filters" style="margin-bottom: var(--space-4);">
+    <div class="field" style="flex: 1; min-width: 240px;">
+      <label>Поиск</label>
+      <input name="q" placeholder="Тема, текст, тег">
+    </div>
+    <div class="field">
+      <label>Модуль</label>
+      <input name="module" placeholder="например, Документы">
+    </div>
+    <div class="field">
+      <label>Статус</label>
+      <select name="status">
+        <option value="">любой</option>
+        <option>open</option>
+        <option>in_progress</option>
+        <option>resolved</option>
+        <option>closed</option>
+        <option>cancelled</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn--ghost btn--sm">Применить</button>
+  </form>
+
+  <div class="card" data-slot="table-wrap">
+    <span class="loader-l2"></span>
+  </div>
+</section>

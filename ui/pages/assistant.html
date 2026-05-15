@@ -1,0 +1,35 @@
+<section data-page="assistant">
+  <header class="page-header">
+    <div>
+      <h1>Ассистент</h1>
+      <div class="page-header__sub">Спросите о тикете или симптоме — ассистент найдёт похожие случаи в базе</div>
+    </div>
+  </header>
+
+  <div class="chat" data-slot="chat">
+    <div class="chat__history" data-slot="history">
+      <div class="empty-state">Задайте вопрос — ассистент покажет источники и предложит шаги решения.</div>
+    </div>
+
+    <div class="attached-ticket" data-slot="attached" hidden></div>
+
+    <form class="chat__composer" data-slot="composer">
+      <textarea name="query" placeholder="Например: не загружается выписка PDF в модуле Документы" required></textarea>
+      <div class="chat__composer__side">
+        <div class="ticket-picker" data-slot="picker">
+          <input
+            type="text"
+            placeholder="Прицепить тикет (SM-… или текст)"
+            data-slot="picker-input"
+            autocomplete="off">
+          <div class="ticket-picker__results" data-slot="picker-results" hidden></div>
+        </div>
+        <button type="submit" class="btn btn--primary">Спросить</button>
+      </div>
+      <label class="row chat__opt" style="align-items: center; gap: var(--space-2); margin-top: var(--space-2);">
+        <input type="checkbox" name="allow_clarify">
+        <span class="t-body-small t-secondary">Разрешать уточняющие вопросы (multi-turn)</span>
+      </label>
+    </form>
+  </div>
+</section>

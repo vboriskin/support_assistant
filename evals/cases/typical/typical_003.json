@@ -1,0 +1,11 @@
+{
+  "case_id": "typical_003",
+  "category": "typical",
+  "query": "Какой формат документа принимается на загрузку?",
+  "ticket_context": {"module": "Документы"},
+  "expected_sources": ["kb_doc_format_rules"],
+  "must_mention": ["pdf"],
+  "must_not_mention": [],
+  "expected_answer_summary": "PDF/A или обычный PDF без защиты, до 5 МБ; для сканированных — OCR.",
+  "edge_case_type": "typical"
+}

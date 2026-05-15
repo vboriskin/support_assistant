@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_access_offboarding",
+  "category": "Авторизация",
+  "edge_case_type": "typical",
+  "query": "Сегодня уволился менеджер, как удалить ему доступ к системе",
+  "expected_sources": ["kb_chunk:access_management"],
+  "must_mention": ["HR", "IAM"],
+  "must_not_mention": [],
+  "expected_answer_summary": "HR подаёт заявку через корп-портал. Автоматически отзывается в IAM. Если задержка >24 часов — эскалация в iam_team."
+}

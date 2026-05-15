@@ -1,0 +1,10 @@
+[
+  {"module": "Расчётный счёт",   "urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 480},
+  {"module": "Расчётный счёт",   "urgency": "critical", "first_response_minutes": 15,  "resolution_minutes": 120},
+  {"module": "Договоры",         "urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 480},
+  {"module": "Зарплатный проект","urgency": "high",     "first_response_minutes": 15,  "resolution_minutes": 240},
+  {"module": "Зарплатный проект","urgency": "critical", "first_response_minutes": 5,   "resolution_minutes": 60},
+  {"module": "Налоги",           "urgency": "high",     "first_response_minutes": 30,  "resolution_minutes": 240},
+  {"module": "Эквайринг",        "urgency": "high",     "first_response_minutes": 30,  "resolution_minutes": 360},
+  {"module": "Валютные операции","urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 1440}
+]

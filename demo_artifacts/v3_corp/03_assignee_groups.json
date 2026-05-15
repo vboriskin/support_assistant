@@ -1,0 +1,18 @@
+{
+  "by_module": {
+    "Расчётный счёт": "support_l2_accounts",
+    "Договоры": "support_l2_edo",
+    "Зарплатный проект": "support_l2_zp",
+    "Налоги": "support_l2_taxes",
+    "Эквайринг": "support_l2_acquiring",
+    "Валютные операции": "support_l2_fx"
+  },
+  "by_type": {
+    "incident": "support_oncall",
+    "access_request": "compliance_team",
+    "feature_request": "product_team",
+    "bug": "engineering",
+    "question": "support_l1"
+  },
+  "default": "support_l1"
+}

@@ -1,0 +1,19 @@
+<section data-page="fewshot">
+  <header class="page-header">
+    <div>
+      <h1>Few-shot примеры</h1>
+      <div class="page-header__sub">Пул эталонных пар «запрос → хороший ответ». Approved попадают в промпт.</div>
+    </div>
+    <button class="btn btn--primary" data-slot="new-btn">+ Новый пример</button>
+  </header>
+
+  <div class="row" style="gap: var(--space-2); margin-bottom: var(--space-4);">
+    <button type="button" class="btn btn--ghost btn--sm is-selected" data-filter="all">Все</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="pending">На модерации</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="approved">Approved</button>
+    <button type="button" class="btn btn--ghost btn--sm" data-filter="rejected">Rejected</button>
+  </div>
+
+  <div class="card" data-slot="list-wrap"><span class="loader-l2"></span></div>
+  <div data-slot="editor" hidden></div>
+</section>

@@ -1,0 +1,10 @@
+{
+  "case_id": "typical_slow_decision",
+  "category": "Решение",
+  "edge_case_type": "typical",
+  "query": "Прошло 3 часа в очереди УЗ, клиент звонит и нервничает",
+  "expected_sources": ["kb_chunk:queue_sla", "playbook:playbook_slow_decision"],
+  "must_mention": ["2-6 часов", "рабочий день"],
+  "must_not_mention": ["виноваты IT"],
+  "expected_answer_summary": "Объяснить, что норма 2-6 часов, решение в рамках текущего рабочего дня. Не обещать конкретное время. Если >6 часов — эскалация."
+}

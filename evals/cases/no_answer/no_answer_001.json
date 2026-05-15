@@ -1,0 +1,11 @@
+{
+  "case_id": "no_answer_001",
+  "category": "no_answer",
+  "query": "Как включить новый режим валидации для региона Сибирь?",
+  "ticket_context": null,
+  "expected_sources": [],
+  "must_mention": [],
+  "must_not_mention": [],
+  "expected_answer_summary": "Ответ должен быть честным «не знаю»: в источниках нет информации о новом режиме валидации.",
+  "edge_case_type": "no_answer_in_kb"
+}

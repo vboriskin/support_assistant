@@ -1,0 +1,27 @@
+[
+  {"module": "Документы",   "urgency": "low",      "first_response_minutes": 240, "resolution_minutes": 2880},
+  {"module": "Документы",   "urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 480},
+  {"module": "Документы",   "urgency": "high",     "first_response_minutes": 15,  "resolution_minutes": 120},
+  {"module": "Документы",   "urgency": "critical", "first_response_minutes": 5,   "resolution_minutes": 60},
+
+  {"module": "Скоринг",     "urgency": "low",      "first_response_minutes": 120, "resolution_minutes": 1440},
+  {"module": "Скоринг",     "urgency": "normal",   "first_response_minutes": 30,  "resolution_minutes": 240},
+  {"module": "Скоринг",     "urgency": "high",     "first_response_minutes": 15,  "resolution_minutes": 120},
+  {"module": "Скоринг",     "urgency": "critical", "first_response_minutes": 5,   "resolution_minutes": 60},
+
+  {"module": "Авторизация", "urgency": "normal",   "first_response_minutes": 30,  "resolution_minutes": 120},
+  {"module": "Авторизация", "urgency": "high",     "first_response_minutes": 10,  "resolution_minutes": 60},
+  {"module": "Авторизация", "urgency": "critical", "first_response_minutes": 5,   "resolution_minutes": 30},
+
+  {"module": "ДКП",         "urgency": "low",      "first_response_minutes": 120, "resolution_minutes": 1440},
+  {"module": "ДКП",         "urgency": "normal",   "first_response_minutes": 30,  "resolution_minutes": 240},
+  {"module": "ДКП",         "urgency": "high",     "first_response_minutes": 15,  "resolution_minutes": 120},
+
+  {"module": "Решение",     "urgency": "low",      "first_response_minutes": 120, "resolution_minutes": 1440},
+  {"module": "Решение",     "urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 480},
+  {"module": "Решение",     "urgency": "high",     "first_response_minutes": 15,  "resolution_minutes": 120},
+
+  {"module": "Графики",     "urgency": "low",      "first_response_minutes": 240, "resolution_minutes": 1440},
+  {"module": "Графики",     "urgency": "normal",   "first_response_minutes": 60,  "resolution_minutes": 480},
+  {"module": "Графики",     "urgency": "high",     "first_response_minutes": 30,  "resolution_minutes": 180}
+]
