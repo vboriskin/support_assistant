@@ -28,12 +28,30 @@ try:
 except ImportError:
     _HAS_VEC = False
 
+# Реальная проверка: можно ли подгрузить расширение И создать vec0-таблицу.
+# На Ubuntu CI оба флага выше могут быть True, но sqlite-build из репозитория
+# не подружается с пакетом sqlite_vec из-за несовместимости версий — в этом
+# случае пытаемся создать вирт-таблицу и ловим ошибку.
+_HAS_VEC0 = False
+if _HAS_LOAD_EXT and _HAS_VEC:
+    try:
+        import sqlite_vec as _sv
+
+        _c = sqlite3.connect(":memory:")
+        _c.enable_load_extension(True)
+        _sv.load(_c)
+        _c.execute("CREATE VIRTUAL TABLE _probe USING vec0(id TEXT PRIMARY KEY, v float[3])")
+        _c.close()
+        _HAS_VEC0 = True
+    except Exception:  # noqa: BLE001
+        _HAS_VEC0 = False
+
 pytestmark = [
     pytest.mark.integration,
     pytest.mark.skipif(
-        not (_HAS_LOAD_EXT and _HAS_VEC),
-        reason="sqlite3 без load_extension или sqlite_vec не установлен — "
-        "проверяется на Linux/контурном стенде",
+        not _HAS_VEC0,
+        reason="sqlite3 без load_extension / sqlite_vec / vec0-биндинга — "
+        "проверяется на Linux/контурном стенде с совместимым sqlite_vec",
     ),
 ]
 
