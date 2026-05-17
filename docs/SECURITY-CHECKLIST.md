@@ -64,3 +64,46 @@
 3. `git ls-files | grep -E '\.env$|\.env\.'` → пусто (в репозитории только `.env.example`).
 4. На stage-стенде: `curl -i https://<host>/health` через HTTPS возвращает 200.
 5. В `.env.prod` — `LLM_PROVIDER=gigachat`, `PII_STRICT_MODE=true`, `SECURITY_CSRF_ENABLED=true`.
+
+## Apendix: что добавилось после MVP
+
+### 16. CSRF middleware на unsafe-методах
+`api/middleware.py::CSRFMiddleware` блокирует `POST/PUT/DELETE/PATCH` на
+`/api/*` без валидного `X-CSRF-Token`. Токен берётся через `GET /api/csrf`.
+UI авто-инжектит токен в `ui/js/api.js`. Контролируется
+`SECURITY_CSRF_ENABLED=true|false`. В demo-стенде можно отключать;
+в prod **обязательно включено**.
+
+### 17. Diag-выгрузка без утечки секретов
+`GET /api/diag` (UI «Настройки → Выгрузить логи») возвращает JSON
+с настройками, recent_audit, recent_llm_calls, health-checks, БД-counts.
+Что **не попадает** в дамп:
+- полные prompt/response LLM — только хэш + preview ≤200 симв., уже после
+  PII-маскирования;
+- значения secret-полей — только маска `****1234` или флаг `*_set: bool`;
+- содержимое `.env` — только имена ключей и их длина.
+
+Тест-кейс перед релизом: открыть `/api/diag`, прогрепать `client_secret`,
+`Bearer `, `password` — не должно быть в plain.
+
+### 18. DB-аудит критичных действий
+`api/middleware.py::DBAuditMiddleware` пишет в таблицу `audit_log` записи
+о POST/PUT/DELETE на чувствительных путях (`/api/kb`, `/api/ingest`,
+`/api/evals`, `/api/tickets/.../reindex`, `/api/conversations/.../feedback`,
+`/api/prompts`, `/api/fewshot`, `/api/alerts`, `/api/pii`). UI «Аудит»
+читает эту таблицу. Управляется `SECURITY_DB_AUDIT_ENABLED=true|false`.
+
+### 19. Cache-Control на UI-статике
+Все ответы по `/ui/static/*` отдаются с заголовком
+`Cache-Control: no-cache, max-age=0, must-revalidate`. Это нужно, чтобы
+кнопка «Обновить приложение» гарантированно подтягивала свежие JS/CSS.
+В prod при необходимости — заменить на immutable + hashed filenames.
+
+### 20. Branch protection на main
+- `pytest (3.11)`, `pytest (3.12)`, `lint`, `e2e (Playwright)` —
+  обязательные чеки перед мерджем PR в `main`.
+- Force-push в `main` запрещён, удаление `main` запрещено.
+- `strict: true` — PR обязан быть up-to-date с `main`.
+
+Настраивается через GitHub API (`gh api -X PUT .../branches/main/protection`),
+см. `CONTRIBUTING.md` § «Branch protection».

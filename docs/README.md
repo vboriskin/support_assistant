@@ -61,6 +61,21 @@
 | `19-SECURITY.md` | PII, секреты, CSRF, защита от prompt injection |
 | `20-IMPLEMENTATION-PLAN.md` | Пошаговый план реализации с приоритетами |
 
+## Operational-документы (после MVP)
+
+Эти файлы добавлены поверх исходной спецификации — они отражают
+**текущее состояние проекта**, не замысел:
+
+| Файл | Содержание |
+|---|---|
+| `RUN-SCRIPTS.md` | Reference на 4 скрипта запуска (`run.sh` и т.д.) |
+| `E2E-AUDIT.md` | `scripts/e2e_audit.py` + Playwright + CI job `e2e` |
+| `SECURITY-CHECKLIST.md` | 15-pt чеклист безопасности (по итогу MVP) |
+| `GIGACHAT-ONBOARDING.md` | Как получить и настроить credentials GigaChat |
+| `EVAL-BASELINE.md` | Базовые метрики evals и как их интерпретировать |
+
+См. также корневые [`CHANGELOG.md`](../CHANGELOG.md) и [`CONTRIBUTING.md`](../CONTRIBUTING.md).
+
 ## Принципы реализации
 
 1. **Адаптеры для всего внешнего.** LLM, эмбеддинги, vector store, источник тикетов — за интерфейсами. Замена компонента = замена одного модуля.
