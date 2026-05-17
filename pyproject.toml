@@ -58,6 +58,11 @@ dev = [
     "mypy>=1.10,<2",
     "types-python-dateutil",
 ]
+e2e = [
+    # Browser E2E-аудит (scripts/e2e_audit.py).
+    # Браузер ставится отдельно: `playwright install chromium`.
+    "playwright>=1.45,<2",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]
