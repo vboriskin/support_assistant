@@ -83,8 +83,11 @@ export async function renderHealth(container) {
   container.innerHTML = html;
   const checks = container.querySelector('[data-slot="checks"]');
   const coverage = container.querySelector('[data-slot="coverage"]');
+  if (!checks || !coverage) return; // навигация уже сменилась
   await Promise.all([_renderChecks(checks), _renderCoverage(coverage)]);
-  container.querySelector('[data-slot="refresh"]').addEventListener("click", () => {
+  const refresh = container.querySelector('[data-slot="refresh"]');
+  if (!refresh) return; // контейнер уже перерендерился — выходим тихо
+  refresh.addEventListener("click", () => {
     _renderChecks(checks);
     _renderCoverage(coverage);
   });

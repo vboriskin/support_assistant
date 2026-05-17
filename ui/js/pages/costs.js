@@ -105,7 +105,9 @@ export async function renderCosts(container) {
   container.innerHTML = html;
   let period = "week";
   const picker = container.querySelector('[data-slot="period"]');
+  if (!picker) return; // навигация уже сменилась
   await _load(container, period);
+  if (!container.querySelector('[data-slot="period"]')) return;
   picker.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-period]");
     if (!btn) return;
