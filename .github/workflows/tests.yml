@@ -5,6 +5,23 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      strict:
+        description: "Strict mode для e2e (console warnings и 4xx → FAIL)"
+        type: boolean
+        required: false
+        default: false
+
+# Если в будущем e2e станет узким местом — можно ограничить его триггер
+# меткой на PR:
+#   on:
+#     pull_request:
+#       types: [labeled, synchronize]
+#   jobs:
+#     e2e:
+#       if: contains(github.event.pull_request.labels.*.name, 'e2e')
+# и оставить push + workflow_dispatch как есть.
 
 jobs:
   pytest:
@@ -102,7 +119,14 @@ jobs:
           curl -sf http://127.0.0.1:8765/health || (echo "Server did not start" && cat /tmp/uvicorn.log && exit 1)
 
       - name: Run E2E audit
-        run: python -m scripts.e2e_audit --base-url http://127.0.0.1:8765
+        # При ручном dispatch с inputs.strict=true передаём --strict
+        # (console warnings и 4xx тоже валят CI).
+        run: |
+          ARGS="--base-url http://127.0.0.1:8765"
+          if [ "${{ inputs.strict }}" = "true" ]; then
+            ARGS="$ARGS --strict"
+          fi
+          python -m scripts.e2e_audit $ARGS
 
       - name: Stop uvicorn
         if: always()
