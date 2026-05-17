@@ -2,23 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Annotated, Any
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from api.dependencies import (
     SessionDep,
     embeddings_client,
     text_search_client,
-    tickets_repo,
     vector_store_client,
 )
 from db.models import Ticket as TicketORM
 from db.models import TicketSummary as TicketSummaryORM
-from db.repositories.tickets import TicketsRepository
 
 
 def _text_search_for_search(ts=Depends(text_search_client)):

@@ -97,6 +97,24 @@ select = [
 ignore = [
     "E501",  # длина строки — есть line-length
     "B008",  # FastAPI любит Depends() в дефолтах
+    # RUF001/002/003 — «ambiguous cyrillic vs latin». У нас docstring'и и
+    # error-сообщения на русском, кириллица — это by design, не баг.
+    "RUF001",
+    "RUF002",
+    "RUF003",
+    # BLE001 — широкий `except Exception`. Используется намеренно во многих
+    # местах для graceful fallback (LLM/embeddings/vector_store/PII могут
+    # упасть произвольным способом, но мы не должны валить ингест/UI).
+    "BLE001",
+    # E701 — multiple statements on one line. Иногда осознанно для коротких
+    # if-elif chain'ов в маперах типов.
+    "E701",
+    # SIM105 — replace try/except/pass with contextlib.suppress. По вкусу.
+    "SIM105",
+    # SIM108 — навязчивая замена if/else на тернар. Иногда читаемость лучше с if.
+    "SIM108",
+    # RUF005 — list-concat vs unpacking — стилистика, не баг.
+    "RUF005",
 ]
 
 [tool.ruff.lint.per-file-ignores]

@@ -51,7 +51,7 @@ async def _run(case_set: str, sample: int | None) -> int:
     try:
         await vec.count()
         await fts.count()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         log.warning("evals.warmup_failed", error=str(e))
 
     retrieval = RetrievalService(

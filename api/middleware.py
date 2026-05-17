@@ -11,9 +11,9 @@ from __future__ import annotations
 import re
 import uuid
 from collections import defaultdict, deque
+from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime
 from time import time
-from typing import Awaitable, Callable
 
 from fastapi import Request, Response
 from fastapi.responses import JSONResponse
@@ -158,7 +158,7 @@ class DBAuditMiddleware(BaseHTTPMiddleware):
                     )
                 )
                 await session.commit()
-        except Exception as e:  # noqa: BLE001 — audit не должен валить запрос
+        except Exception as e:
             logger.warning("audit.persist_failed", error=str(e), path=path)
         return response
 

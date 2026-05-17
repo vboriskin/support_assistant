@@ -7,7 +7,7 @@ import json
 import uuid
 from collections import defaultdict
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Any
 
 from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
@@ -93,7 +93,6 @@ async def _run_csv_job(
         _publish(job_id, {"event": "done", "job_id": job_id, "stats": stats})
 
         async with factory() as session, session.begin():
-            repo = IngestJobsRepository(session)
             # total_items, processed, failed — в колонках; полная сводка
             # (skipped + распределение) — в metadata_json для UI.
             from sqlalchemy import update as sa_update
@@ -119,14 +118,14 @@ async def _run_csv_job(
             )
         async with factory() as session, session.begin():
             await IngestJobsRepository(session).mark_finished(job_id, status="succeeded")
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.exception("ingest.job_failed", job_id=job_id, error=str(e))
         try:
             async with factory() as session, session.begin():
                 await IngestJobsRepository(session).mark_finished(
                     job_id, status="failed", error=str(e)
                 )
-        except Exception:  # noqa: BLE001 — лог уже выше
+        except Exception:
             pass
 
 

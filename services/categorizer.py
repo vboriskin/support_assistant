@@ -219,7 +219,7 @@ class CategorizerService:
                 target_types=["ticket_summary", "ticket_symptom"],
                 min_score=0.80,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("categorizer.similarity_search_failed", error=str(e))
             return []
 
@@ -231,7 +231,7 @@ class CategorizerService:
             seen.add(hit.target_id)
             try:
                 ticket = await self.tickets_repo.get(hit.target_id)
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 logger.warning("categorizer.ticket_lookup_failed", error=str(e))
                 continue
             if ticket is None:

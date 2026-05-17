@@ -98,7 +98,7 @@ def _versions() -> dict[str, str]:
             m = __import__(mod)
             ver = getattr(m, "__version__", None) or getattr(m, "version", None)
             out[mod] = str(ver) if ver else "unknown"
-        except Exception:  # noqa: BLE001
+        except Exception:
             out[mod] = "not installed"
     return out
 
@@ -202,7 +202,7 @@ def _env_summary() -> dict[str, Any]:
                     out["keys"].append(
                         {"name": key.strip(), "length": len(val.strip().strip("\"'"))}
                     )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         out["error"] = str(e)[:200]
     return out
 
@@ -217,7 +217,7 @@ async def _check_adapter(name: str, fn) -> dict[str, Any]:  # type: ignore[no-un
     try:
         await fn()
         return {"name": name, "status": "ok", "latency_ms": int((_t.time() - t0) * 1000)}
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         return {"name": name, "status": "error", "error": str(e)[:400]}
 
 
@@ -242,7 +242,7 @@ async def _db_snapshot(session) -> dict[str, Any]:  # type: ignore[no-untyped-de
         try:
             n = (await session.execute(select(func.count()).select_from(model))).scalar() or 0
             counts[label] = int(n)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             counts[label] = -1
             counts[label + "__error"] = str(e)[:200]  # type: ignore[assignment]
 
@@ -250,7 +250,7 @@ async def _db_snapshot(session) -> dict[str, Any]:  # type: ignore[no-untyped-de
     rev = None
     try:
         rev = (await session.execute(text("SELECT version_num FROM alembic_version LIMIT 1"))).scalar()
-    except Exception:  # noqa: BLE001
+    except Exception:
         rev = None
 
     return {"table_counts": counts, "alembic_version": rev}
@@ -391,7 +391,7 @@ def _recent_eval_runs(limit: int = 10) -> list[dict[str, Any]]:
                     "aggregate": data.get("aggregate") or {},
                 }
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             out.append({"file": p.name, "error": str(e)[:200]})
     return out
 

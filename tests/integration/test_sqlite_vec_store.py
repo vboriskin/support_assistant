@@ -10,48 +10,30 @@
 
 from __future__ import annotations
 
-import sqlite3
+import os
 
 import pytest
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from adapters.embeddings.mock import MockEmbeddingsClient
-from adapters.vector_store.sqlite_vec_store import SQLiteVecStore
 from adapters.vector_store.base import VectorRecord
+from adapters.vector_store.sqlite_vec_store import SQLiteVecStore
 from config.settings import Settings
 
-_HAS_LOAD_EXT = hasattr(sqlite3.connect(":memory:"), "enable_load_extension")
-try:
-    import sqlite_vec  # noqa: F401
-
-    _HAS_VEC = True
-except ImportError:
-    _HAS_VEC = False
-
-# Реальная проверка: можно ли подгрузить расширение И создать vec0-таблицу.
-# На Ubuntu CI оба флага выше могут быть True, но sqlite-build из репозитория
-# не подружается с пакетом sqlite_vec из-за несовместимости версий — в этом
-# случае пытаемся создать вирт-таблицу и ловим ошибку.
-_HAS_VEC0 = False
-if _HAS_LOAD_EXT and _HAS_VEC:
-    try:
-        import sqlite_vec as _sv
-
-        _c = sqlite3.connect(":memory:")
-        _c.enable_load_extension(True)
-        _sv.load(_c)
-        _c.execute("CREATE VIRTUAL TABLE _probe USING vec0(id TEXT PRIMARY KEY, v float[3])")
-        _c.close()
-        _HAS_VEC0 = True
-    except Exception:  # noqa: BLE001
-        _HAS_VEC0 = False
+# sqlite_vec работает только при определённом стечении обстоятельств:
+# - sqlite3 собран с enable_load_extension (macOS python.org build — без него),
+# - aiosqlite-обёртка не блокирует load_extension (SQLAlchemy AsyncAdapt — блокирует),
+# - системный sqlite совместим с пакетом sqlite_vec из PyPI.
+# Проверять всё это надёжно из теста невозможно. Поэтому тесты опт-ин:
+# запускаются только при `RUN_SQLITE_VEC_TESTS=1` на специально подготовленном
+# стенде (см. docs/SECURITY-CHECKLIST или CI-job для prod-проверки).
+_OPT_IN = bool(os.getenv("RUN_SQLITE_VEC_TESTS"))
 
 pytestmark = [
     pytest.mark.integration,
     pytest.mark.skipif(
-        not _HAS_VEC0,
-        reason="sqlite3 без load_extension / sqlite_vec / vec0-биндинга — "
-        "проверяется на Linux/контурном стенде с совместимым sqlite_vec",
+        not _OPT_IN,
+        reason="sqlite_vec тесты требуют RUN_SQLITE_VEC_TESTS=1 и совместимый стенд",
     ),
 ]
 

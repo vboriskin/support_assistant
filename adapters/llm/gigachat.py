@@ -46,7 +46,7 @@ logger = get_logger("adapters.llm.gigachat")
 class _TokenCache:
     """OAuth-токен с пометкой времени истечения."""
 
-    __slots__ = ("_token", "_expires_at")
+    __slots__ = ("_expires_at", "_token")
 
     def __init__(self) -> None:
         self._token: str | None = None

@@ -18,11 +18,11 @@ import json
 from pathlib import Path
 
 import pytest
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 
 from adapters.embeddings.mock import MockEmbeddingsClient
 from adapters.llm.mock import MockLLMClient
-from adapters.text_search.base import TextSearchHit, TextSearchRecord
 from adapters.text_search.sqlite_fts import SQLiteFTS5
 from adapters.ticket_source.csv_source import CSVTicketSource
 from adapters.vector_store.base import VectorRecord, VectorSearchHit
@@ -33,7 +33,6 @@ from db.models import Ticket as TicketORM
 from db.models import TicketSummary as TicketSummaryORM
 from db.repositories.tickets import TicketsRepository
 from pipelines.ticket_ingestion.pipeline import TicketIngestionPipeline
-from sqlalchemy import select
 
 DIM = 32
 

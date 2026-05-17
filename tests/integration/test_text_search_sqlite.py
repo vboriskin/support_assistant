@@ -9,7 +9,6 @@ from adapters.text_search.base import TextSearchRecord
 from adapters.text_search.sqlite_fts import SQLiteFTS5
 from config.settings import Settings
 
-
 pytestmark = pytest.mark.integration
 
 

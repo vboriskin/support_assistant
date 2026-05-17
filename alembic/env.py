@@ -10,12 +10,12 @@ from __future__ import annotations
 
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config, pool
 
+from alembic import context
 from config.settings import get_settings
-from db.base import Base
 from db import models  # noqa: F401  — регистрирует таблицы в Base.metadata
+from db.base import Base
 
 config = context.config
 

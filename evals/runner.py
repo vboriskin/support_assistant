@@ -26,7 +26,6 @@ from core.models import (
     Answer,
     AssistantRequest,
     EvalCase,
-    Source,
     TicketContext,
 )
 from evals.judges.faithfulness import FaithfulnessJudge
@@ -115,7 +114,7 @@ class EvalRunner:
                 try:
                     data = json.loads(p.read_text(encoding="utf-8"))
                     cases.append(EvalCase(**data))
-                except Exception as e:  # noqa: BLE001
+                except Exception as e:
                     logger.warning("evals.case_load_failed", path=str(p), error=str(e))
         return cases
 
@@ -180,7 +179,7 @@ class EvalRunner:
                 ),
             )
             answer: Answer = await self.assistant.answer(req)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             errors.append(f"assistant_error: {e}")
             return CaseResult(
                 case_id=case.case_id,
@@ -208,7 +207,7 @@ class EvalRunner:
             f_score, f_expl = await self.f_judge.evaluate(
                 answer=answer, sources=answer.used_sources
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             f_score, f_expl = 0.0, f"judge_error: {e}"
             errors.append(str(e))
 
@@ -220,7 +219,7 @@ class EvalRunner:
                 expected_summary=case.expected_answer_summary,
                 no_answer_expected=no_answer_expected,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             h_score, h_expl = 0.0, f"judge_error: {e}"
             errors.append(str(e))
 

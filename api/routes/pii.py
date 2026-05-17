@@ -82,7 +82,7 @@ async def test_pii(body: PIITestRequest) -> dict[str, Any]:
 class _AdHocMatch:
     """Лёгкая структура для совпадений из произвольных regex'ов."""
 
-    __slots__ = ("label", "start", "end", "value")
+    __slots__ = ("end", "label", "start", "value")
 
     def __init__(self, *, label: str, start: int, end: int, value: str) -> None:
         self.label = label

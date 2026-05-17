@@ -106,7 +106,7 @@ def run_audit(base_url: str, report_out: Path, screenshot_dir: Path) -> dict:
             try:
                 url = resp.url
                 status = resp.status
-            except Exception:  # noqa: BLE001
+            except Exception:
                 return
             if _API_RX.match(url):
                 report["api_calls"].append(
@@ -140,7 +140,7 @@ def run_audit(base_url: str, report_out: Path, screenshot_dir: Path) -> dict:
                     fname = screenshot_dir / f"fail{route.replace('/', '_')}.png"
                     page.screenshot(path=str(fname), full_page=True)
                     report["screenshots"].append(str(fname))
-                except Exception:  # noqa: BLE001
+                except Exception:
                     pass
             entry["latency_ms"] = int((time.time() - t0) * 1000)
             report["routes"].append(entry)
@@ -307,7 +307,7 @@ def main() -> int:
 
     try:
         report = run_audit(args.base_url, report_out, screenshot_dir)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"FATAL: {e}", file=sys.stderr)
         return 2
 

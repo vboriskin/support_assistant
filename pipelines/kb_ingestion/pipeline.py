@@ -55,7 +55,7 @@ class KBIngestionPipeline:
         try:
             await self.vector_store.count()
             await self.text_search.count()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("kb.warmup_failed", error=str(e))
 
         stats = {"total": 0, "indexed": 0, "skipped": 0, "failed": 0, "chunks": 0}
@@ -84,7 +84,7 @@ class KBIngestionPipeline:
                 )
                 stats["indexed"] += 1
                 stats["chunks"] += len(chunks)
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 logger.exception(
                     "kb.article_failed",
                     source=raw.source_path,

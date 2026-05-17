@@ -99,7 +99,7 @@ async def index_ticket(
                 ),
             ]
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("index.vector_store_upsert_failed", ticket_id=ticket_id, error=str(e))
 
     content_parts = [summary.symptom, ticket.description]
@@ -117,7 +117,7 @@ async def index_ticket(
                 )
             ]
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("index.text_search_upsert_failed", ticket_id=ticket_id, error=str(e))
 
     # 3. Отметка indexed_at — отдельной транзакцией

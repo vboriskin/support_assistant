@@ -245,8 +245,14 @@ async def health_details() -> dict[str, Any]:
     """Расширенный health-чек: пинги до LLM, embeddings, vector_store, FTS."""
     from api.dependencies import (
         embeddings_client as _emb_dep,
+    )
+    from api.dependencies import (
         llm_client as _llm_dep,
+    )
+    from api.dependencies import (
         text_search_client as _ts_dep,
+    )
+    from api.dependencies import (
         vector_store_client as _vs_dep,
     )
 
@@ -257,7 +263,7 @@ async def health_details() -> dict[str, Any]:
         try:
             await fn()
             return {"name": name, "status": "ok", "latency_ms": int((_t.time() - t0) * 1000)}
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             return {"name": name, "status": "error", "error": str(e)[:200]}
 
     llm = _llm_dep()
@@ -362,7 +368,7 @@ async def dashboard(
         )
     ).scalars().all()
     cur_module_counts = Counter(
-        m for _, m in tickets_in_period if m  # noqa: E501
+        m for _, m in tickets_in_period if m
     )
     prev_module_counts = Counter(m for m in prev_tickets if m)
 

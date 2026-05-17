@@ -9,12 +9,11 @@ Upload — это синхронный аплоад markdown-файла как �
 
 from __future__ import annotations
 
-from typing import Annotated, Any
-
 import io
 import tempfile
 import zipfile
 from pathlib import Path
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel, Field
@@ -29,7 +28,7 @@ from api.dependencies import (
 )
 from core.chunking import chunk_text
 from db.repositories.kb import KBRepository
-from pipelines.kb_ingestion.index import delete_article_index, index_article
+from pipelines.kb_ingestion.index import delete_article_index
 from pipelines.kb_ingestion.pipeline import KBIngestionPipeline
 
 router = APIRouter(prefix="/kb", tags=["kb"])
@@ -140,8 +139,8 @@ async def create_article(
     # После commit'а — индексация
     if chunks:
         try:
-            from adapters.vector_store.base import VectorRecord
             from adapters.text_search.base import TextSearchRecord
+            from adapters.vector_store.base import VectorRecord
 
             texts = [c.text for c in chunks]
             vectors = await embeddings.embed_documents(texts)
@@ -175,7 +174,7 @@ async def create_article(
                     for c in chunks
                 ]
             )
-        except Exception:  # noqa: BLE001 — индекс упал, статья в БД есть
+        except Exception:
             pass
 
     return _serialize(art)
@@ -223,8 +222,8 @@ async def update_article(
         await session.commit()
 
         if new_chunks:
-            from adapters.vector_store.base import VectorRecord
             from adapters.text_search.base import TextSearchRecord
+            from adapters.vector_store.base import VectorRecord
 
             texts = [c.text for c in new_chunks]
             vectors = await embeddings.embed_documents(texts)
@@ -259,7 +258,7 @@ async def update_article(
                         for c in new_chunks
                     ]
                 )
-            except Exception:  # noqa: BLE001
+            except Exception:
                 pass
     else:
         await session.commit()

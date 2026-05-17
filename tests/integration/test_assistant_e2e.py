@@ -24,7 +24,7 @@ from adapters.vector_store.base import VectorRecord
 from config.settings import Settings
 from core.models import AssistantRequest, Source
 from services.answer_formatter import AnswerFormatter
-from services.assistant import AssistantService, build_assistant
+from services.assistant import build_assistant
 from services.prompt_builder import PromptBuilder
 from services.reranker import NoopReranker
 from services.retrieval import RetrievalService

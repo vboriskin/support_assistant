@@ -193,7 +193,7 @@ async def test_ingest_csv_creates_job_and_get_job_returns_it(app_with_mocks) -> 
     csv_data = (
         "external_id,created_at,status,subject,description\n"
         "SM-1,2026-04-01T10:00:00,open,Тест,описание\n"
-    ).encode("utf-8")
+    ).encode()
     async with _client(app) as c:
         r = await c.post(
             "/api/ingest/csv",

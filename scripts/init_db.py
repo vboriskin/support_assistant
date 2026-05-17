@@ -15,9 +15,9 @@ import sqlite3
 import sys
 from pathlib import Path
 
-from alembic import command
 from alembic.config import Config
 
+from alembic import command
 from config.logging import configure_logging, get_logger
 from config.settings import get_settings
 

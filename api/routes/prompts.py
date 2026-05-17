@@ -11,7 +11,7 @@ from __future__ import annotations
 import time
 import uuid
 from datetime import UTC, datetime
-from typing import Annotated, Any, Literal
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
@@ -26,7 +26,7 @@ from api.dependencies import (
     retrieval_service,
 )
 from config.logging import get_logger
-from core.models import AssistantRequest, TicketContext
+from core.models import TicketContext
 from core.prompts.loader import load_prompt
 from db.models import PromptVersion
 from services.assistant import AssistantService
@@ -163,7 +163,7 @@ def _load_case(case_id: str) -> dict[str, Any] | None:
             data = _json.loads(p.read_text(encoding="utf-8"))
             if data.get("case_id") == case_id:
                 return data
-        except Exception:  # noqa: BLE001
+        except Exception:
             continue
     return None
 
@@ -224,5 +224,5 @@ async def preview(
             "case_id": body.case_id,
             "query": query,
         }
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         raise HTTPException(500, detail=f"llm error: {e}") from e

@@ -291,7 +291,7 @@ class AssistantService:
             if session is not None:
                 await session.commit()
             return getattr(msg, "id", None)
-        except Exception as e:  # noqa: BLE001 — лог сохранения не должен валить ответ
+        except Exception as e:
             logger.warning("assistant.persist_failed", error=str(e))
             return None
 
@@ -321,7 +321,7 @@ class AssistantService:
                 completion_tokens=completion_tokens,
                 error=error,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("assistant.log_failed", error=str(e))
 
 

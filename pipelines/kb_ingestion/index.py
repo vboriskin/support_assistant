@@ -66,7 +66,7 @@ async def index_article(
     texts = [c.text for c in chunks]
     try:
         vectors = await embeddings.embed_documents(texts)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("kb.embed_failed", article_id=article_id, error=str(e))
         vectors = []
 
@@ -89,7 +89,7 @@ async def index_article(
         ]
         try:
             await vector_store.upsert(vec_records)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("kb.vector_upsert_failed", article_id=article_id, error=str(e))
 
     fts_records = [
@@ -104,7 +104,7 @@ async def index_article(
     ]
     try:
         await text_search.upsert(fts_records)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("kb.text_search_failed", article_id=article_id, error=str(e))
 
     return article_id
@@ -120,9 +120,9 @@ async def delete_article_index(
     """Удаляет все векторы/FTS-записи для удалённой статьи."""
     try:
         await vector_store.delete_by_target("kb_chunk", chunk_ids)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("kb.vector_delete_failed", article_id=article_id, error=str(e))
     try:
         await text_search.delete_by_target("kb_chunk", chunk_ids)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("kb.text_search_delete_failed", article_id=article_id, error=str(e))

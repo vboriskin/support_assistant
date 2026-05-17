@@ -93,11 +93,11 @@ class TicketIngestionPipeline:
         # упасть; те ошибки логируются в ``index_ticket``.
         try:
             await self.vector_store.count()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("ingest.vector_store_warmup_failed", error=str(e))
         try:
             await self.text_search.count()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("ingest.text_search_warmup_failed", error=str(e))
 
         stats: dict[str, Any] = {
@@ -115,7 +115,7 @@ class TicketIngestionPipeline:
             stats["total"] += 1
             try:
                 result = await self._process_one(raw)
-            except Exception as e:  # noqa: BLE001 — мы хотим логировать ВСЁ
+            except Exception as e:
                 logger.exception(
                     "ingest.ticket_failed",
                     external_id=raw.external_id,

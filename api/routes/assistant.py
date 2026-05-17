@@ -53,7 +53,7 @@ async def chat_stream(
                 data = chunk.model_dump_json(exclude_none=True)
                 yield f"data: {data}\n\n"
             yield "data: [DONE]\n\n"
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             err = json.dumps({"type": "error", "error": str(e)}, ensure_ascii=False)
             yield f"data: {err}\n\n"
             yield "data: [DONE]\n\n"

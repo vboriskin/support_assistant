@@ -73,7 +73,7 @@ def register_error_handlers(app: FastAPI) -> None:
         )
 
     @app.exception_handler(Exception)
-    async def _fallback(_: Request, exc: Exception) -> JSONResponse:  # noqa: BLE001
+    async def _fallback(_: Request, exc: Exception) -> JSONResponse:
         logger.exception("api.unhandled_error", error=str(exc))
         return JSONResponse(
             status_code=500,

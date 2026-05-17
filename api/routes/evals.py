@@ -18,11 +18,19 @@ from pydantic import BaseModel, Field
 
 from api.dependencies import (
     _session_factory,
-    embeddings_client as _emb_dep,
     get_user_id,
-    llm_client as _llm_dep,
     settings_dep,
+)
+from api.dependencies import (
+    embeddings_client as _emb_dep,
+)
+from api.dependencies import (
+    llm_client as _llm_dep,
+)
+from api.dependencies import (
     text_search_client as _ts_dep,
+)
+from api.dependencies import (
     vector_store_client as _vs_dep,
 )
 from config.logging import get_logger
@@ -124,7 +132,7 @@ async def _run_in_bg(run_id: str, body: EvalRunRequest, settings: Settings) -> N
                 sample_size=body.sample_size,
                 run_id=run_id,
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.exception("evals.bg_failed", run_id=run_id, error=str(e))
         _REPORTS_DIR.mkdir(parents=True, exist_ok=True)
         (_REPORTS_DIR / f"{run_id}.json").write_text(
@@ -168,7 +176,7 @@ async def list_runs() -> list[dict[str, Any]]:
     for p in sorted(_REPORTS_DIR.glob("*.json"), reverse=True):
         try:
             out.append(_summary_from_path(p))
-        except Exception:  # noqa: BLE001
+        except Exception:
             continue
     return out
 

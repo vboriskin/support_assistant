@@ -36,11 +36,13 @@ from api.routes import (
     kb,
     pii,
     prompts,
-    settings as settings_route,
     stale,
     stats,
     tickets,
     weak,
+)
+from api.routes import (
+    settings as settings_route,
 )
 from config.logging import configure_logging, get_logger
 from config.settings import Settings, get_settings
@@ -67,7 +69,7 @@ async def lifespan(app: FastAPI):
     try:
         await vector_store_client().count()
         await text_search_client().count()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("lifespan.warmup_failed", error=str(e))
 
     # Фоновый watcher алёртов (только если включён в settings)
@@ -76,9 +78,10 @@ async def lifespan(app: FastAPI):
     alerts_task: _asyncio.Task | None = None
     if settings.alerts.enabled and settings.alerts.webhook_url:
         async def _alerts_loop() -> None:
-            from db.engine import get_session_factory
             import httpx as _httpx
-            from api.routes.alerts import compute_signals, _violations
+
+            from api.routes.alerts import _violations, compute_signals
+            from db.engine import get_session_factory
 
             factory = get_session_factory()
             interval = max(60, settings.alerts.check_interval_sec)
@@ -99,7 +102,7 @@ async def lifespan(app: FastAPI):
                         last_sent_violations = cur
                     elif not cur:
                         last_sent_violations = ()
-                except Exception as e:  # noqa: BLE001
+                except Exception as e:
                     logger.warning("alerts.loop_failed", error=str(e))
                 await _asyncio.sleep(interval)
 
@@ -119,15 +122,15 @@ async def lifespan(app: FastAPI):
             alerts_task.cancel()
             try:
                 await alerts_task
-            except Exception:  # noqa: BLE001
+            except Exception:
                 pass
         try:
             await llm_client().aclose()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("lifespan.llm_close_failed", error=str(e))
         try:
             await embeddings_client().aclose()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("lifespan.embeddings_close_failed", error=str(e))
         await dispose_engine()
 
@@ -180,7 +183,7 @@ def create_app() -> FastAPI:
             resp = await super().get_response(path, scope)
             try:
                 resp.headers["Cache-Control"] = "no-cache, max-age=0, must-revalidate"
-            except Exception:  # noqa: BLE001
+            except Exception:
                 pass
             return resp
 

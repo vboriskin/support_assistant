@@ -223,7 +223,7 @@ class RetrievalService:
         if self.reranker and self.settings.reranker.enabled and len(candidates) > target_top_k:
             try:
                 reranked = await self.reranker.rerank(query, candidates, top_k=target_top_k)
-            except Exception as e:  # noqa: BLE001 — reranker не должен валить поиск
+            except Exception as e:
                 logger.warning("reranker.failed", error=str(e))
                 reranked = candidates[:target_top_k]
         else:
@@ -289,7 +289,7 @@ class RetrievalService:
     ) -> list[VectorSearchHit]:
         try:
             vec = await self.embeddings.embed_query(query)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("retrieval.embed_failed", error=str(e))
             return []
         md_filters: dict[str, Any] | None = None
@@ -305,7 +305,7 @@ class RetrievalService:
                 metadata_filters=md_filters,
                 min_score=filters.min_score,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("retrieval.vector_search_failed", error=str(e))
             return []
 
@@ -323,6 +323,6 @@ class RetrievalService:
                 top_k=self.settings.vector_store.text_search_top_k,
                 target_types=filters.target_types,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("retrieval.text_search_failed", error=str(e))
             return []

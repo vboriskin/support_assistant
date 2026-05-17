@@ -26,7 +26,7 @@ async def find_duplicate_canonical(
             target_types=["ticket_summary"],
             min_score=threshold,
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         logger.warning("dedupe.search_failed", error=str(e))
         return None
     if not hits:

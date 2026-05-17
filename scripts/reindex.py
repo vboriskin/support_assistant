@@ -54,7 +54,7 @@ async def _run(batch_size: int) -> int:
     try:
         await vec.count()
         await fts.count()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         log.warning("warmup_failed", error=str(e))
 
     total = 0
@@ -75,7 +75,7 @@ async def _run(batch_size: int) -> int:
             try:
                 sum_vecs = await embeddings.embed_documents(summary_texts)
                 sym_vecs = await embeddings.embed_documents(symptom_texts)
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 log.warning("embed_failed", batch_start=batch_start, error=str(e))
                 failed += len(batch)
                 continue
@@ -125,11 +125,11 @@ async def _run(batch_size: int) -> int:
                 )
             try:
                 await vec.upsert(vec_records)
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 log.warning("vec_upsert_failed", error=str(e))
             try:
                 await fts.upsert(fts_records)
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 log.warning("fts_upsert_failed", error=str(e))
             total += len(batch)
             log.info("reindex.batch", done=total, total_candidates=len(rows))

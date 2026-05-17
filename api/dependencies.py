@@ -41,7 +41,6 @@ from services.prompt_builder import PromptBuilder
 from services.reranker import create_reranker
 from services.retrieval import RetrievalService
 
-
 # ----------------------------------------------------------------------
 # Settings & user identity
 # ----------------------------------------------------------------------
@@ -196,7 +195,8 @@ async def assistant_service(
     # Активная версия системного промпта (если есть в БД)
     try:
         from sqlalchemy import select
-        from db.models import PromptVersion, FewShotExample
+
+        from db.models import FewShotExample, PromptVersion
 
         active = (
             await session.execute(
@@ -220,7 +220,7 @@ async def assistant_service(
         ).scalars().all()
         for e in approved:
             pb.add_few_shot(user=e.user_text, assistant=e.assistant_text)
-    except Exception:  # noqa: BLE001 — БД не готова, остаёмся на baseline
+    except Exception:
         pass
 
     return AssistantService(

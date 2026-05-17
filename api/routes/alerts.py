@@ -7,7 +7,6 @@ Background-watcher живёт в lifespan'е приложения (см. api/mai
 
 from __future__ import annotations
 
-import time
 from datetime import UTC, datetime, timedelta
 from typing import Annotated, Any
 
@@ -49,7 +48,7 @@ async def compute_signals(session, window_minutes: int = 60) -> dict[str, Any]:
             )
         )
     ).all()
-    latencies = [float(l or 0) for l, _ in rows]
+    latencies = [float(lat or 0) for lat, _ in rows]
     error_count = sum(1 for _, e in rows if e)
 
     msgs = (
@@ -140,6 +139,6 @@ async def trigger(
                 }
                 await client.post(settings.alerts.webhook_url, json=payload)
                 sent = True
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("alerts.webhook_failed", error=str(e))
     return {"signals": sig, "violations": violations, "webhook_sent": sent}

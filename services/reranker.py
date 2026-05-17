@@ -167,7 +167,7 @@ class CrossEncoderReranker:
             return candidates
         try:
             model = await self._ensure_model()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             logger.warning("reranker.cross_encoder.load_failed", error=str(e))
             return candidates[:top_k]
         import asyncio as _asyncio

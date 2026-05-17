@@ -19,8 +19,8 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from db.base import Base
 from db import models  # noqa: F401  — регистрация таблиц
+from db.base import Base
 from db.engine import _install_sqlite_hooks
 
 
